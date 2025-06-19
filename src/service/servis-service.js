@@ -38,7 +38,6 @@ const getServisById = async (id) => {
 const getServisByNoUnik = async (no_unik) => {
   const dataList = await servisRepositori.getServisByNoUnik(no_unik);
 
-  // console.log(dataList);
   if (dataList.length === 0) {
     return [];
   }
@@ -86,7 +85,7 @@ const inputServis = async (
   const existingAlatKerja =
     await alatKerjaRepositori.getAlatKerjaByNoRegistrasi(data.no_unik);
 
-  const existingAC = await acRepositori.getACByNoRegistrasi(data.no_unik);
+  const existingAC = await acRepositori.getAcByNoRegistrasi(data.no_unik);
 
   if (
     !existingKendaraan &&
@@ -212,7 +211,7 @@ const updateServis = async (
     data.no_unik,
     data.nama_bengkel,
     data.biaya_servis,
-    nota,
+    nota_pembayaran,
     dokumentasi
   );
 

@@ -22,7 +22,7 @@ const getServisById = async (req, res) => {
 const getServisByNoUnik = async (req, res) => {
   try {
     const no_unik = req.params.no_unik;
-    // console.log("Nomor unik yang diterima:", no_unik);
+
     const data = await servisServis.getServisByNoUnik(no_unik);
     res.status(200).json({ message: "Data servis berhasil ditemukan", data });
   } catch (error) {
@@ -34,6 +34,9 @@ const inputServis = async (req, res) => {
   try {
     const data = req.body;
     const files = req.files;
+
+    console.log("BODY:", data);
+    console.log("FILES:", files);
 
     const notaPembayaran = files?.["nota_pembayaran"]?.[0];
     const dokumentasi = files?.["dokumentasi"]?.[0];
@@ -52,6 +55,7 @@ const inputServis = async (req, res) => {
     );
     res.status(200).json({ message: "Data servis berhasil diinput" });
   } catch (error) {
+    console.error("ERROR SERVIS INPUT:", error);
     res.status(500).json({ error: error.message });
   }
 };
