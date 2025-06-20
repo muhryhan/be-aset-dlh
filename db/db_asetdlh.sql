@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `ac` (
-  `id_ac` int(11) NOT NULL,
+  `id_ac` int(255) NOT NULL,
   `qrcode` varchar(255) NOT NULL,
   `gambar` varchar(255) NOT NULL,
   `merek` varchar(255) NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE `alatberat` (
 --
 
 CREATE TABLE `alatkerja` (
-  `id_alatkerja` int(11) NOT NULL,
+  `id_alatkerja` int(255) NOT NULL,
   `qrcode` varchar(255) NOT NULL,
   `gambar` varchar(255) NOT NULL,
   `merek` varchar(255) NOT NULL,
@@ -118,7 +118,7 @@ CREATE TABLE `kendaraan` (
 --
 
 CREATE TABLE `onderdil` (
-  `id_onderdil` int(11) NOT NULL,
+  `id_onderdil` int(255) NOT NULL,
   `id_servis` int(255) NOT NULL,
   `nama_onderdil` varchar(255) NOT NULL,
   `jumlah` int(255) NOT NULL,
@@ -185,7 +185,7 @@ CREATE TABLE `serberkendaraan` (
 --
 
 CREATE TABLE `servis` (
-  `id_servis` int(11) NOT NULL,
+  `id_servis` int(255) NOT NULL,
   `tanggal` date NOT NULL,
   `no_unik` varchar(255) NOT NULL,
   `nama_bengkel` varchar(255) NOT NULL,
@@ -201,7 +201,7 @@ CREATE TABLE `servis` (
 --
 
 CREATE TABLE `tanaman` (
-  `id_tanaman` int(11) NOT NULL,
+  `id_tanaman` int(255) NOT NULL,
   `gambar` varchar(255) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `jenis` varchar(255) NOT NULL,
@@ -216,7 +216,7 @@ CREATE TABLE `tanaman` (
 --
 
 CREATE TABLE `tanamankeluar` (
-  `id_tanamankeluar` int(11) NOT NULL,
+  `id_tanamankeluar` int(255) NOT NULL,
   `id_tanaman` int(255) NOT NULL,
   `tanggal` date NOT NULL,
   `jumlah` int(255) NOT NULL,
@@ -230,7 +230,7 @@ CREATE TABLE `tanamankeluar` (
 --
 
 CREATE TABLE `tanamanmasuk` (
-  `id_tanamanmasuk` int(11) NOT NULL,
+  `id_tanamanmasuk` int(255) NOT NULL,
   `id_tanaman` int(255) NOT NULL,
   `tanggal` date NOT NULL,
   `jumlah` int(255) NOT NULL,
@@ -244,7 +244,7 @@ CREATE TABLE `tanamanmasuk` (
 --
 
 CREATE TABLE `user` (
-  `id_user` int(11) NOT NULL,
+  `id_user` int(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -358,7 +358,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `ac`
 --
 ALTER TABLE `ac`
-  MODIFY `id_ac` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_ac` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `alatberat`
@@ -370,7 +370,7 @@ ALTER TABLE `alatberat`
 -- AUTO_INCREMENT untuk tabel `alatkerja`
 --
 ALTER TABLE `alatkerja`
-  MODIFY `id_alatkerja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_alatkerja` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `kendaraan`
@@ -382,7 +382,7 @@ ALTER TABLE `kendaraan`
 -- AUTO_INCREMENT untuk tabel `onderdil`
 --
 ALTER TABLE `onderdil`
-  MODIFY `id_onderdil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_onderdil` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `serberac`
@@ -412,31 +412,31 @@ ALTER TABLE `serberkendaraan`
 -- AUTO_INCREMENT untuk tabel `servis`
 --
 ALTER TABLE `servis`
-  MODIFY `id_servis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_servis` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `tanaman`
 --
 ALTER TABLE `tanaman`
-  MODIFY `id_tanaman` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tanaman` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tanamankeluar`
 --
 ALTER TABLE `tanamankeluar`
-  MODIFY `id_tanamankeluar` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tanamankeluar` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tanamanmasuk`
 --
 ALTER TABLE `tanamanmasuk`
-  MODIFY `id_tanamanmasuk` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tanamanmasuk` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

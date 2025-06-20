@@ -10,8 +10,6 @@ const getServisByNoUnik = async (no_unik) => {
     "SELECT * FROM servis WHERE no_unik = ? ORDER BY tanggal DESC",
     [no_unik]
   );
-
-  console.log(rows);
   return rows;
 };
 
