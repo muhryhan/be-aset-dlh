@@ -35,9 +35,6 @@ const inputServis = async (req, res) => {
     const data = req.body;
     const files = req.files;
 
-    console.log("BODY:", data);
-    console.log("FILES:", files);
-
     const notaPembayaran = files?.["nota_pembayaran"]?.[0];
     const dokumentasi = files?.["dokumentasi"]?.[0];
 

@@ -173,7 +173,7 @@ const updateServis = async (
   const existingAlatKerja =
     await alatKerjaRepositori.getAlatKerjaByNoRegistrasi(data.no_unik);
 
-  const existingAC = await acRepositori.getACByNoRegistrasi(data.no_unik);
+  const existingAC = await acRepositori.getAcByNoRegistrasi(data.no_unik);
 
   if (
     !existingKendaraan &&
