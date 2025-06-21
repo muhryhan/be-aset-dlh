@@ -43,7 +43,7 @@ const getServisById = async (id) => {
 const getServisByNoUnik = async (no_unik) => {
   const dataList = await servisRepositori.getServisByNoUnik(no_unik);
   if (dataList.length === 0) {
-    throw new Error("Data servis tidak ditemukan");
+    return [];
   }
 
   const dataWithOnderdil = await Promise.all(
@@ -423,7 +423,7 @@ const updateServis = async (
   const existingAlatKerja =
     await alatKerjaRepositori.getAlatKerjaByNoRegistrasi(data.no_unik);
 
-  const existingAC = await acRepositori.getACByNoRegistrasi(data.no_unik);
+  const existingAC = await acRepositori.getAcByNoRegistrasi(data.no_unik);
 
   if (
     !existingKendaraan &&
