@@ -205,7 +205,7 @@ const inputServis = async (
       // Update Servis berkala Alat Berat
       if (existingAlatBerat) {
         const servisBerkalaAlatBerat =
-          await servisBerkalaAlatBeratRepositori.getServisBerkalaAlatBeratByNoReg(
+          await servisBerkalaAlatBeratRepositori.getServisBerkalaAlatBeratByNoRegistrasi(
             data.no_unik
           );
 
@@ -438,7 +438,7 @@ const updateServis = async (
       // Update Servis berkala Alat Berat
       if (existingAlatBerat) {
         const servisBerkalaAlatBerat =
-          await servisBerkalaAlatBeratRepositori.getServisBerkalaAlatBeratByNoReg(
+          await servisBerkalaAlatBeratRepositori.getServisBerkalaAlatBeratByNoRegistrasi(
             data.no_unik
           );
 

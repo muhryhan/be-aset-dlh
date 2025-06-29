@@ -277,45 +277,45 @@ userRouter.get(
 );
 
 userRouter.put(
-  "/api/servisberkalakendaraan/:no_polisi",
+  "/api/servisberkalakendaraan/:id_serberkendaraan",
   authMiddleware,
   servisBerkalaKendaraanController.updateServisBerkalaKendaraan
 );
 
 // ============== Route Servis Berkala Alat Berat ==============
 userRouter.get(
-  "/api/servisberkalalatberat",
+  "/api/servisberkalaalatberat",
   authMiddleware,
   servisBerkalaAlatBeratController.getServisBerkalaAlatBerat
 );
 
 userRouter.get(
-  "/api/servisberkalalatberat/:no_resgistrasi",
+  "/api/servisberkalaalatberat/:no_registrasi",
   authMiddleware,
   servisBerkalaAlatBeratController.getServisBerkalaAlatBeratByNoRegistrasi
 );
 
 userRouter.put(
-  "/api/servisberkalalatberat/:no_resgistrasi",
+  "/api/servisberkalaalatberat/:id_serberalatberat",
   authMiddleware,
   servisBerkalaAlatBeratController.updateServisBerkalaAlatBerat
 );
 
 // ============== Route Servis Berkala Alat Kerja ==============
 userRouter.get(
-  "/api/servisberkalalatkerja",
+  "/api/servisberkalaalatkerja",
   authMiddleware,
   servisBerkalaAlatKerjaController.getServisBerkalaAlatKerja
 );
 
 userRouter.get(
-  "/api/servisberkalalatkerja/:no_registrasi",
+  "/api/servisberkalaalatkerja/:no_registrasi",
   authMiddleware,
   servisBerkalaAlatKerjaController.getServisBerkalaAlatKerjaByNoRegistrasi
 );
 
 userRouter.put(
-  "/api/servisberkalalatkerja/:no_registrasi",
+  "/api/servisberkalaalatkerja/:id_serberalatkerja",
   authMiddleware,
   servisBerkalaAlatKerjaController.updateServisBerkalaAlatKerja
 );
@@ -334,7 +334,7 @@ userRouter.get(
 );
 
 userRouter.put(
-  "/api/servisberkalaac/:no_registrasi",
+  "/api/servisberkalaac/:id_serberaac",
   authMiddleware,
   servisBerkalaAcController.updateServisBerkalaAc
 );

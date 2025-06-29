@@ -30,7 +30,7 @@ const getServisBerkalaAcByNoRegistrasi = async (req, res) => {
 
 const updateServisBerkalaAc = async (req, res) => {
   try {
-    const id = req.params.id;
+    const id = req.params.id_serberac;
     const servisBerkalaAc = req.body;
     await servisBerkalaAcService.updateServisBerkalaAc(id, servisBerkalaAc);
     res.status(200).json({ message: "berhasil update" });
