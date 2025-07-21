@@ -138,7 +138,6 @@ const inputServis = async (
             data.no_unik
           );
 
-        console.log(servisBerkalaKendaraan)
         switch (item.nama_onderdil) {
           case "oli_mesin":
             await servisBerkalaKendaraanRepositori.updateServisBerkalaKendaraan(

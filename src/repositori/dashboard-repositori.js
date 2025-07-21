@@ -4,6 +4,7 @@ const getCountR2 = async () => {
   const [rows] = await conn.query(
     "SELECT COUNT(*) as R2 FROM kendaraan WHERE kategori = 'R2'"
   );
+
   return rows[0];
 };
 
@@ -32,6 +33,7 @@ const getCountAlatBerat = async () => {
   const [rows] = await conn.query(
     "SELECT COUNT(*) as alatberat FROM alatberat"
   );
+
   return rows[0];
 };
 

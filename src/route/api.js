@@ -6,6 +6,7 @@ import kendaraanController from "../controller/kendaraan-controller.js";
 import alatBeratController from "../controller/alatBerat-controller.js";
 import alatKerjaController from "../controller/alatKerja-controller.js";
 import acController from "../controller/ac-controller.js";
+import tanahController from "../controller/tanah-controller.js";
 import tanamanController from "../controller/tanaman-controller.js";
 import tanamanMasukController from "../controller/tanamanMasuk-controller.js";
 import tanamanKeluarController from "../controller/tanamanKeluar-controller.js";
@@ -134,6 +135,27 @@ userRouter.put(
   acController.updateAc
 );
 userRouter.delete("/api/ac/:id", authMiddleware, acController.deleteAc);
+
+// ============== Route Tanah ==============
+userRouter.get("/api/tanah", authMiddleware, tanahController.getTanah);
+userRouter.get("/api/tanah/:id", authMiddleware, tanahController.getTanahById);
+userRouter.post(
+  "/api/tanah",
+  authMiddleware,
+  imgMiddleware.single("gambar"),
+  tanahController.inputTanah
+);
+userRouter.put(
+  "/api/tanah/:id",
+  authMiddleware,
+  imgMiddleware.single("gambar"),
+  tanahController.updateTanah
+);
+userRouter.delete(
+  "/api/tanah/:id",
+  authMiddleware,
+  tanahController.deleteTanah
+);
 
 // ============== Route Tanaman ==============
 userRouter.get("/api/tanaman", authMiddleware, tanamanController.getTanaman);
@@ -334,7 +356,7 @@ userRouter.get(
 );
 
 userRouter.put(
-  "/api/servisberkalaac/:id_serberaac",
+  "/api/servisberkalaac/:id_serberac",
   authMiddleware,
   servisBerkalaAcController.updateServisBerkalaAc
 );

@@ -22,7 +22,6 @@ const getServisBerkalaKendaraanByNoPol = async (no_polisi) => {
 };
 
 const updateServisBerkalaKendaraan = async (id, servisBerkalaKendaraan) => {
-  console.log(servisBerkalaKendaraan);
   if (
     !servisBerkalaKendaraan.no_polisi ||
     !servisBerkalaKendaraan.oli_mesin ||

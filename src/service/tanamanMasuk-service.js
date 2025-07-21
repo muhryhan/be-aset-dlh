@@ -134,8 +134,6 @@ const deleteTanamanMasuk = async (id) => {
     tanaman.keterangan
   );
 
-  console.log(tanaman.stok);
-
   return await tanamanMasukRepositori.deleteTanamanMasuk(id);
 };
 
