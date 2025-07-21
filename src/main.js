@@ -1,3 +1,3 @@
 import web from "./application/web.js";
 
-web.listen(5000, () => console.log("Server is running"));
+web.listen(3000, () => console.log("Server is running"));

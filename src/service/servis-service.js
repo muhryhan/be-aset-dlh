@@ -5,6 +5,10 @@ import kendaraanRepositori from "../repositori/kendaraan-repositori.js";
 import alatBeratRepositori from "../repositori/alatBerat-repositori.js";
 import alatKerjaRepositori from "../repositori/alatKerja-repositori.js";
 import acRepositori from "../repositori/ac-repositori.js";
+import servisBerkalaKendaraanRepositori from "../repositori/servisBerkalaKendaraan-repositori.js";
+import servisBerkalaAlatBeratRepositori from "../repositori/servisBerkalaAlatBerat-repositori.js";
+import servisBerkalaAlatKerjaRepositori from "../repositori/servisBerkalaAlatKerja-repositori.js";
+import servisBerkalaAcRepositori from "../repositori/servisBerkalaAc-repositori.js";
 
 const getServis = async () => {
   const dataList = await servisRepositori.getServis();
@@ -37,9 +41,8 @@ const getServisById = async (id) => {
 
 const getServisByNoUnik = async (no_unik) => {
   const dataList = await servisRepositori.getServisByNoUnik(no_unik);
-
   if (dataList.length === 0) {
-    return [];
+    throw new Error("Data servis tidak ditemukan");
   }
 
   const dataWithOnderdil = await Promise.all(
@@ -128,6 +131,140 @@ const inputServis = async (
         throw new Error("Data onderdil tidak lengkap");
       }
 
+      // Update Servis berkala Kendaraan
+      if (existingKendaraan) {
+        const servisBerkalaKendaraan =
+          await servisBerkalaKendaraanRepositori.getServisBerkalaKendaraanByNoPol(
+            data.no_unik
+          );
+
+        switch (item.nama_onderdil) {
+          case "oli_mesin":
+            await servisBerkalaKendaraanRepositori.updateServisBerkalaKendaraan(
+              servisBerkalaKendaraan.id_serberkendaraan,
+              servisBerkalaKendaraan.no_polisi,
+              data.tanggal,
+              servisBerkalaKendaraan.filter_oli_mesin,
+              servisBerkalaKendaraan.oli_gardan,
+              servisBerkalaKendaraan.oli_transmisi,
+              servisBerkalaKendaraan.ban
+            );
+            break;
+
+          case "filter_oli_mesin":
+            await servisBerkalaKendaraanRepositori.updateServisBerkalaKendaraan(
+              servisBerkalaKendaraan.id_serberkendaraan,
+              servisBerkalaKendaraan.no_polisi,
+              servisBerkalaKendaraan.oli_mesin,
+              data.tanggal,
+              servisBerkalaKendaraan.oli_gardan,
+              servisBerkalaKendaraan.oli_transmisi,
+              servisBerkalaKendaraan.ban
+            );
+            break;
+
+          case "oli_gardan":
+            await servisBerkalaKendaraanRepositori.updateServisBerkalaKendaraan(
+              servisBerkalaKendaraan.id_serberkendaraan,
+              servisBerkalaKendaraan.no_polisi,
+              servisBerkalaKendaraan.oli_mesin,
+              servisBerkalaKendaraan.filter_oli_mesin,
+              data.tanggal,
+              servisBerkalaKendaraan.oli_transmisi,
+              servisBerkalaKendaraan.ban
+            );
+            break;
+
+          case "oli_transmisi":
+            await servisBerkalaKendaraanRepositori.updateServisBerkalaKendaraan(
+              servisBerkalaKendaraan.id_serberkendaraan,
+              servisBerkalaKendaraan.no_polisi,
+              servisBerkalaKendaraan.oli_mesin,
+              servisBerkalaKendaraan.filter_oli_mesin,
+              servisBerkalaKendaraan.oli_gardan,
+              data.tanggal,
+              servisBerkalaKendaraan.ban
+            );
+            break;
+
+          case "ban":
+            await servisBerkalaKendaraanRepositori.updateServisBerkalaKendaraan(
+              servisBerkalaKendaraan.id_serberkendaraan,
+              servisBerkalaKendaraan.no_polisi,
+              servisBerkalaKendaraan.oli_mesin,
+              servisBerkalaKendaraan.filter_oli_mesin,
+              servisBerkalaKendaraan.oli_gardan,
+              servisBerkalaKendaraan.oli_transmisi,
+              data.tanggal
+            );
+            break;
+        }
+      }
+
+      // Update Servis berkala Alat Berat
+      if (existingAlatBerat) {
+        const servisBerkalaAlatBerat =
+          await servisBerkalaAlatBeratRepositori.getServisBerkalaAlatBeratByNoRegistrasi(
+            data.no_unik
+          );
+
+        switch (item.nama_onderdil) {
+          case "oli_mesin":
+            await servisBerkalaAlatBeratRepositori.updateServisBerkalaAlatBerat(
+              servisBerkalaAlatBerat.id_serberalatberat,
+              servisBerkalaAlatBerat.no_registrasi,
+              data.tanggal,
+              servisBerkalaAlatBerat.filter_oli_mesin
+            );
+            break;
+
+          case "filter_oli_mesin":
+            await servisBerkalaAlatBeratRepositori.updateServisBerkalaAlatBerat(
+              servisBerkalaAlatBerat.id_serberalatberat,
+              servisBerkalaAlatBerat.no_registrasi,
+              servisBerkalaAlatBerat.oli_mesin,
+              data.tanggal
+            );
+            break;
+        }
+      }
+
+      // Update Servis berkala Alat Kerja
+      if (existingAlatKerja) {
+        const servisBerkalaAlatKerja =
+          await servisBerkalaAlatKerjaRepositori.getServisBerkalaAlatKerjaByNoRegistrasi(
+            data.no_unik
+          );
+
+        switch (item.nama_onderdil) {
+          case "oli_mesin":
+            await servisBerkalaAlatKerjaRepositori.updateServisBerkalaAlatKerja(
+              servisBerkalaAlatKerja.id_serberalatkerja,
+              servisBerkalaAlatKerja.no_registrasi,
+              data.tanggal
+            );
+            break;
+        }
+      }
+
+      // Update Servis berkala AC
+      if (existingAC) {
+        const servisBerkalaAc =
+          await servisBerkalaAcRepositori.getServisBerkalaAcByNoRegistrasi(
+            data.no_unik
+          );
+
+        switch (item.nama_onderdil) {
+          case "cuci":
+            await servisBerkalaAcRepositori.updateServisBerkalaAc(
+              servisBerkalaAc.id_serberac,
+              servisBerkalaAc.no_registrasi,
+              data.tanggal
+            );
+            break;
+        }
+      }
+
       await onderdilRepositori.createOnderdil(
         id_servis,
         item.nama_onderdil,
@@ -173,7 +310,7 @@ const updateServis = async (
   const existingAlatKerja =
     await alatKerjaRepositori.getAlatKerjaByNoRegistrasi(data.no_unik);
 
-  const existingAC = await acRepositori.getACByNoRegistrasi(data.no_unik);
+  const existingAC = await acRepositori.getAcByNoRegistrasi(data.no_unik);
 
   if (
     !existingKendaraan &&
@@ -211,7 +348,7 @@ const updateServis = async (
     data.no_unik,
     data.nama_bengkel,
     data.biaya_servis,
-    nota_pembayaran,
+    nota,
     dokumentasi
   );
 
@@ -225,6 +362,140 @@ const updateServis = async (
     for (const item of data.onderdil) {
       if (!item.nama_onderdil || !item.jumlah || !item.harga) {
         throw new Error("Data onderdil tidak lengkap");
+      }
+
+      // Update Servis berkala Kendaraan
+      if (existingKendaraan) {
+        const servisBerkalaKendaraan =
+          await servisBerkalaKendaraanRepositori.getServisBerkalaKendaraanByNoPol(
+            data.no_unik
+          );
+
+        switch (item.nama_onderdil) {
+          case "oli_mesin":
+            await servisBerkalaKendaraanRepositori.updateServisBerkalaKendaraan(
+              servisBerkalaKendaraan.id_serberkendaraan,
+              servisBerkalaKendaraan.no_polisi,
+              data.tanggal,
+              servisBerkalaKendaraan.filter_oli_mesin,
+              servisBerkalaKendaraan.oli_gardan,
+              servisBerkalaKendaraan.oli_transmisi,
+              servisBerkalaKendaraan.ban
+            );
+            break;
+
+          case "filter_oli_mesin":
+            await servisBerkalaKendaraanRepositori.updateServisBerkalaKendaraan(
+              servisBerkalaKendaraan.id_serberkendaraan,
+              servisBerkalaKendaraan.no_polisi,
+              servisBerkalaKendaraan.oli_mesin,
+              data.tanggal,
+              servisBerkalaKendaraan.oli_gardan,
+              servisBerkalaKendaraan.oli_transmisi,
+              servisBerkalaKendaraan.ban
+            );
+            break;
+
+          case "oli_gardan":
+            await servisBerkalaKendaraanRepositori.updateServisBerkalaKendaraan(
+              servisBerkalaKendaraan.id_serberkendaraan,
+              servisBerkalaKendaraan.no_polisi,
+              servisBerkalaKendaraan.oli_mesin,
+              servisBerkalaKendaraan.filter_oli_mesin,
+              data.tanggal,
+              servisBerkalaKendaraan.oli_transmisi,
+              servisBerkalaKendaraan.ban
+            );
+            break;
+
+          case "oli_transmisi":
+            await servisBerkalaKendaraanRepositori.updateServisBerkalaKendaraan(
+              servisBerkalaKendaraan.id_serberkendaraan,
+              servisBerkalaKendaraan.no_polisi,
+              servisBerkalaKendaraan.oli_mesin,
+              servisBerkalaKendaraan.filter_oli_mesin,
+              servisBerkalaKendaraan.oli_gardan,
+              data.tanggal,
+              servisBerkalaKendaraan.ban
+            );
+            break;
+
+          case "ban":
+            await servisBerkalaKendaraanRepositori.updateServisBerkalaKendaraan(
+              servisBerkalaKendaraan.id_serberkendaraan,
+              servisBerkalaKendaraan.no_polisi,
+              servisBerkalaKendaraan.oli_mesin,
+              servisBerkalaKendaraan.filter_oli_mesin,
+              servisBerkalaKendaraan.oli_gardan,
+              servisBerkalaKendaraan.oli_transmisi,
+              data.tanggal
+            );
+            break;
+        }
+      }
+
+      // Update Servis berkala Alat Berat
+      if (existingAlatBerat) {
+        const servisBerkalaAlatBerat =
+          await servisBerkalaAlatBeratRepositori.getServisBerkalaAlatBeratByNoRegistrasi(
+            data.no_unik
+          );
+
+        switch (item.nama_onderdil) {
+          case "oli_mesin":
+            await servisBerkalaAlatBeratRepositori.updateServisBerkalaAlatBerat(
+              servisBerkalaAlatBerat.id_serberalatberat,
+              servisBerkalaAlatBerat.no_registrasi,
+              data.tanggal,
+              servisBerkalaAlatBerat.filter_oli_mesin
+            );
+            break;
+
+          case "filter_oli_mesin":
+            await servisBerkalaAlatBeratRepositori.updateServisBerkalaAlatBerat(
+              servisBerkalaAlatBerat.id_serberalatberat,
+              servisBerkalaAlatBerat.no_registrasi,
+              servisBerkalaAlatBerat.oli_mesin,
+              data.tanggal
+            );
+            break;
+        }
+      }
+
+      // Update Servis berkala Alat Kerja
+      if (existingAlatKerja) {
+        const servisBerkalaAlatKerja =
+          await servisBerkalaAlatKerjaRepositori.getServisBerkalaAlatKerjaByNoRegistrasi(
+            data.no_unik
+          );
+
+        switch (item.nama_onderdil) {
+          case "oli_mesin":
+            await servisBerkalaAlatKerjaRepositori.updateServisBerkalaAlatKerja(
+              servisBerkalaAlatKerja.id_serberalatkerja,
+              servisBerkalaAlatKerja.no_registrasi,
+              data.tanggal
+            );
+            break;
+        }
+      }
+
+      // Update Servis berkala AC
+      if (existingAC) {
+        const servisBerkalaAc =
+          await servisBerkalaAcRepositori.getServisBerkalaAcByNoRegistrasi(
+            data.no_unik
+          );
+
+        switch (item.nama_onderdil) {
+          case "cuci":
+            await servisBerkalaAcRepositori.updateServisBerkalaAc(
+              servisBerkalaAc.id_serberac,
+              servisBerkalaAc.no_registrasi,
+              data.tanggal
+            );
+            break;
+        }
       }
 
       await onderdilRepositori.createOnderdil(

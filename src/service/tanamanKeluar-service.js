@@ -45,8 +45,6 @@ const inputTanamanKeluar = async (data) => {
   }
 
   tanaman.stok -= data.jumlah;
-  console.log(tanaman.stok);
-  console.log(data.id_tanaman);
 
   await tanamanRepositori.updateTanaman(
     data.id_tanaman,

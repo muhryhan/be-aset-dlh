@@ -25,14 +25,14 @@ const updateServisBerkalaKendaraan = async (id, servisBerkalaKendaraan) => {
   if (
     !servisBerkalaKendaraan.no_polisi ||
     !servisBerkalaKendaraan.oli_mesin ||
-    !servisBerkalaKendaraan.filter_oli ||
+    !servisBerkalaKendaraan.filter_oli_mesin ||
     !servisBerkalaKendaraan.oli_gardan ||
     !servisBerkalaKendaraan.oli_transmisi ||
     !servisBerkalaKendaraan.ban
   ) {
     throw new Error("Data tidak lengkap");
   }
-  const Kendaraan = await kendaraanRepositori.getKendaraanById(
+  const Kendaraan = await kendaraanRepositori.getKendaraanByNoPol(
     servisBerkalaKendaraan.no_polisi
   );
 
@@ -52,7 +52,7 @@ const updateServisBerkalaKendaraan = async (id, servisBerkalaKendaraan) => {
     id,
     servisBerkalaKendaraan.no_polisi,
     servisBerkalaKendaraan.oli_mesin,
-    servisBerkalaKendaraan.filter_oli,
+    servisBerkalaKendaraan.filter_oli_mesin,
     servisBerkalaKendaraan.oli_gardan,
     servisBerkalaKendaraan.oli_transmisi,
     servisBerkalaKendaraan.ban

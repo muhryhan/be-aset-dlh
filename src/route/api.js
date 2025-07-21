@@ -6,6 +6,7 @@ import kendaraanController from "../controller/kendaraan-controller.js";
 import alatBeratController from "../controller/alatBerat-controller.js";
 import alatKerjaController from "../controller/alatKerja-controller.js";
 import acController from "../controller/ac-controller.js";
+import tanahController from "../controller/tanah-controller.js";
 import tanamanController from "../controller/tanaman-controller.js";
 import tanamanMasukController from "../controller/tanamanMasuk-controller.js";
 import tanamanKeluarController from "../controller/tanamanKeluar-controller.js";
@@ -15,6 +16,7 @@ import servisBerkalaAlatBeratController from "../controller/servisBerkalaAlatBer
 import servisBerkalaAlatKerjaController from "../controller/servisBerkalaAlatKerja-controller.js";
 import servisBerkalaAcController from "../controller/servisBerkalaAc-controller.js";
 import servisBerkalaQrCodeController from "../controller/servisBerkalaQrCode-controller.js";
+import dashboardController from "../controller/dashboard-controller.js";
 
 const userRouter = new express.Router();
 
@@ -133,6 +135,27 @@ userRouter.put(
   acController.updateAc
 );
 userRouter.delete("/api/ac/:id", authMiddleware, acController.deleteAc);
+
+// ============== Route Tanah ==============
+userRouter.get("/api/tanah", authMiddleware, tanahController.getTanah);
+userRouter.get("/api/tanah/:id", authMiddleware, tanahController.getTanahById);
+userRouter.post(
+  "/api/tanah",
+  authMiddleware,
+  imgMiddleware.single("gambar"),
+  tanahController.inputTanah
+);
+userRouter.put(
+  "/api/tanah/:id",
+  authMiddleware,
+  imgMiddleware.single("gambar"),
+  tanahController.updateTanah
+);
+userRouter.delete(
+  "/api/tanah/:id",
+  authMiddleware,
+  tanahController.deleteTanah
+);
 
 // ============== Route Tanaman ==============
 userRouter.get("/api/tanaman", authMiddleware, tanamanController.getTanaman);
@@ -276,45 +299,45 @@ userRouter.get(
 );
 
 userRouter.put(
-  "/api/servisberkalakendaraan/:no_polisi",
+  "/api/servisberkalakendaraan/:id_serberkendaraan",
   authMiddleware,
   servisBerkalaKendaraanController.updateServisBerkalaKendaraan
 );
 
 // ============== Route Servis Berkala Alat Berat ==============
 userRouter.get(
-  "/api/servisberkalalatberat",
+  "/api/servisberkalaalatberat",
   authMiddleware,
   servisBerkalaAlatBeratController.getServisBerkalaAlatBerat
 );
 
 userRouter.get(
-  "/api/servisberkalalatberat/:no_resgistrasi",
+  "/api/servisberkalaalatberat/:no_registrasi",
   authMiddleware,
   servisBerkalaAlatBeratController.getServisBerkalaAlatBeratByNoRegistrasi
 );
 
 userRouter.put(
-  "/api/servisberkalalatberat/:no_resgistrasi",
+  "/api/servisberkalaalatberat/:id_serberalatberat",
   authMiddleware,
   servisBerkalaAlatBeratController.updateServisBerkalaAlatBerat
 );
 
 // ============== Route Servis Berkala Alat Kerja ==============
 userRouter.get(
-  "/api/servisberkalalatkerja",
+  "/api/servisberkalaalatkerja",
   authMiddleware,
   servisBerkalaAlatKerjaController.getServisBerkalaAlatKerja
 );
 
 userRouter.get(
-  "/api/servisberkalalatkerja/:no_registrasi",
+  "/api/servisberkalaalatkerja/:no_registrasi",
   authMiddleware,
   servisBerkalaAlatKerjaController.getServisBerkalaAlatKerjaByNoRegistrasi
 );
 
 userRouter.put(
-  "/api/servisberkalalatkerja/:no_registrasi",
+  "/api/servisberkalaalatkerja/:id_serberalatkerja",
   authMiddleware,
   servisBerkalaAlatKerjaController.updateServisBerkalaAlatKerja
 );
@@ -333,7 +356,7 @@ userRouter.get(
 );
 
 userRouter.put(
-  "/api/servisberkalaac/:no_registrasi",
+  "/api/servisberkalaac/:id_serberac",
   authMiddleware,
   servisBerkalaAcController.updateServisBerkalaAc
 );
@@ -342,6 +365,13 @@ userRouter.put(
 userRouter.get(
   "/api/servisberkalaqrcode/:no_unik",
   servisBerkalaQrCodeController.getServisBerkalaQrCode
+);
+
+// ============= Dashboard ==============
+userRouter.get(
+  "/api/dashboard",
+  authMiddleware,
+  dashboardController.getDashboard
 );
 
 export { userRouter };

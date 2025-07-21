@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 20 Jul 2025 pada 09.38
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.2.12
+-- Host: localhost
+-- Waktu pembuatan: 24 Bulan Mei 2025 pada 16.29
+-- Versi server: 10.4.28-MariaDB
+-- Versi PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -197,28 +197,6 @@ CREATE TABLE `servis` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tanah`
---
-
-CREATE TABLE `tanah` (
-  `id_tanah` int(11) NOT NULL,
-  `gambar` varchar(255) NOT NULL,
-  `nama_barang` varchar(255) NOT NULL,
-  `peruntukan` varchar(255) NOT NULL,
-  `alamat` varchar(255) NOT NULL,
-  `luas` int(255) NOT NULL,
-  `tahun_pengadaan` year(4) NOT NULL,
-  `hak` varchar(255) NOT NULL,
-  `tanggal_sertifikat` date NOT NULL,
-  `nomor_sertifikat` varchar(255) NOT NULL,
-  `status_sertifikat` varchar(255) NOT NULL,
-  `asal` varchar(255) NOT NULL,
-  `harga` int(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `tanaman`
 --
 
@@ -348,12 +326,6 @@ ALTER TABLE `servis`
   ADD PRIMARY KEY (`id_servis`);
 
 --
--- Indeks untuk tabel `tanah`
---
-ALTER TABLE `tanah`
-  ADD PRIMARY KEY (`id_tanah`);
-
---
 -- Indeks untuk tabel `tanaman`
 --
 ALTER TABLE `tanaman`
@@ -441,12 +413,6 @@ ALTER TABLE `serberkendaraan`
 --
 ALTER TABLE `servis`
   MODIFY `id_servis` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT untuk tabel `tanah`
---
-ALTER TABLE `tanah`
-  MODIFY `id_tanah` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tanaman`
