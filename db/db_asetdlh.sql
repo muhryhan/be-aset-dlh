@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Jul 2025 pada 09.38
+-- Waktu pembuatan: 23 Jul 2025 pada 18.02
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -268,16 +268,17 @@ CREATE TABLE `tanamanmasuk` (
 CREATE TABLE `user` (
   `id_user` int(255) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `role` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id_user`, `username`, `password`) VALUES
-(1, 'superadmin', '$2b$10$xDfJ0KFXpWADElmXgl0CkeUqnyFnGRTGIypOOEAYn45wlbybPTlfi'),
-(2, 'admin', '$2b$10$cjl2KbxfR.xZKeTO2QoT/edHEpnTAEWqhO2yEFergdfDbl/wr5fPm');
+INSERT INTO `user` (`id_user`, `username`, `password`, `role`) VALUES
+(1, 'Superadmin', '$2a$12$R3paziUMFl2S62fpcY3a0.yT/rF5txhmSiigfTP84MUSVz/Sqcxr.', 'superadmin'),
+(2, 'Admin', '$2b$10$cjl2KbxfR.xZKeTO2QoT/edHEpnTAEWqhO2yEFergdfDbl/wr5fPm', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -386,25 +387,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `ac`
 --
 ALTER TABLE `ac`
-  MODIFY `id_ac` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_ac` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `alatberat`
 --
 ALTER TABLE `alatberat`
-  MODIFY `id_alatberat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_alatberat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `alatkerja`
 --
 ALTER TABLE `alatkerja`
-  MODIFY `id_alatkerja` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_alatkerja` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `kendaraan`
 --
 ALTER TABLE `kendaraan`
-  MODIFY `id_kendaraan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_kendaraan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `onderdil`
@@ -416,43 +417,43 @@ ALTER TABLE `onderdil`
 -- AUTO_INCREMENT untuk tabel `serberac`
 --
 ALTER TABLE `serberac`
-  MODIFY `id_serberac` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_serberac` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `serberalatberat`
 --
 ALTER TABLE `serberalatberat`
-  MODIFY `id_serberalatberat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_serberalatberat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `serberalatkerja`
 --
 ALTER TABLE `serberalatkerja`
-  MODIFY `id_serberalatkerja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_serberalatkerja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `serberkendaraan`
 --
 ALTER TABLE `serberkendaraan`
-  MODIFY `id_serberkendaraan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_serberkendaraan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `servis`
 --
 ALTER TABLE `servis`
-  MODIFY `id_servis` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_servis` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `tanah`
 --
 ALTER TABLE `tanah`
-  MODIFY `id_tanah` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tanah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `tanaman`
 --
 ALTER TABLE `tanaman`
-  MODIFY `id_tanaman` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tanaman` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `tanamankeluar`

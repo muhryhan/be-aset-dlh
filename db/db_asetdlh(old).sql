@@ -254,8 +254,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`) VALUES
-(1, 'superadmin', '$2b$10$xDfJ0KFXpWADElmXgl0CkeUqnyFnGRTGIypOOEAYn45wlbybPTlfi'),
-(2, 'admin', '$2b$10$cjl2KbxfR.xZKeTO2QoT/edHEpnTAEWqhO2yEFergdfDbl/wr5fPm');
+(1, 'Superadmin', '$2a$12$R3paziUMFl2S62fpcY3a0.yT/rF5txhmSiigfTP84MUSVz/Sqcxr.'),
+(2, 'Admin', '$2b$10$cjl2KbxfR.xZKeTO2QoT/edHEpnTAEWqhO2yEFergdfDbl/wr5fPm');
 
 --
 -- Indexes for dumped tables
