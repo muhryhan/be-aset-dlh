@@ -277,8 +277,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `role`) VALUES
-(1, 'Superadmin', '$2a$12$R3paziUMFl2S62fpcY3a0.yT/rF5txhmSiigfTP84MUSVz/Sqcxr.', 'superadmin'),
-(2, 'Admin', '$2b$10$cjl2KbxfR.xZKeTO2QoT/edHEpnTAEWqhO2yEFergdfDbl/wr5fPm', 'admin');
+(1, 'Kepala Dinas', '$2a$12$4OH44WPOXVBMkczY2Kjiku7J7Agb/s6wqCAs6UH6kMtlu4DpJXCyy', 'kepalaDinas'),
+(2, 'Bendahara', '$2a$12$tv.yVv5HWfxSXA4KK8PaC.z7sckQy3uFzIYjk74y9iwIRb9hjWS7C', 'bendahara');
+(3, 'Admin', '$2a$12$tPhZsvZbIffNlQEgzMYFG.8y9tgDaPZTnHSmfsvTfOPoQNI3aDoxG', 'admin');
 
 --
 -- Indexes for dumped tables
