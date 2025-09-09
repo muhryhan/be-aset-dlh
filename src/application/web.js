@@ -16,7 +16,7 @@ const web = express();
 
 web.use(
   cors({
-    origin: "http://localhost:5173", // HARUS alamat spesifik, bukan '*'
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );
