@@ -1,5 +1,4 @@
 import conn from "../application/db.js";
-import qr from "../helper/qr.js";
 
 const getAlatKerja = async () => {
   const [rows] = await conn.query(
@@ -27,6 +26,8 @@ const getAlatKerjaByNoRegistrasi = async (no_registrasi) => {
 const createAlatKerja = async (
   qrcode,
   gambar,
+  kode_barang,
+  nama_barang,
   merek,
   no_registrasi,
   no_serial,
@@ -34,13 +35,16 @@ const createAlatKerja = async (
   tahun_pembelian,
   harga_pembelian,
   kondisi,
+  pemegang,
   keterangan
 ) => {
   return await conn.query(
-    "INSERT INTO alatkerja (qrcode, gambar, merek, no_registrasi, no_serial, asal, tahun_pembelian, harga_pembelian, kondisi, keterangan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    "INSERT INTO alatkerja (qrcode, gambar, kode_barang, nama_barang, merek, no_registrasi, no_serial, asal, tahun_pembelian, harga_pembelian, kondisi, pemegang, keterangan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
     [
       qrcode,
       gambar,
+      kode_barang,
+      nama_barang,
       merek,
       no_registrasi,
       no_serial,
@@ -48,6 +52,7 @@ const createAlatKerja = async (
       tahun_pembelian,
       harga_pembelian,
       kondisi,
+      pemegang,
       keterangan,
     ]
   );
@@ -57,6 +62,8 @@ const updateAlatKerja = async (
   id,
   qrcode,
   gambar,
+  kode_barang,
+  nama_barang,
   merek,
   no_registrasi,
   no_serial,
@@ -64,13 +71,16 @@ const updateAlatKerja = async (
   tahun_pembelian,
   harga_pembelian,
   kondisi,
+  pemegang,
   keterangan
 ) => {
   return await conn.query(
-    "UPDATE alatkerja SET qrcode = ?, gambar = ?, merek = ?, no_registrasi = ?, no_serial = ?, asal = ?, tahun_pembelian = ?, harga_pembelian = ?, kondisi = ?, keterangan = ? WHERE id_alatkerja = ?",
+    "UPDATE alatkerja SET qrcode = ?, gambar = ?, kode_barang = ?, nama_barang = ?, merek = ?, no_registrasi = ?, no_serial = ?, asal = ?, tahun_pembelian = ?, harga_pembelian = ?, kondisi = ?, pemegang = ?, keterangan = ? WHERE id_alatkerja = ?",
     [
       qrcode,
       gambar,
+      kode_barang,
+      nama_barang,
       merek,
       no_registrasi,
       no_serial,
@@ -78,6 +88,7 @@ const updateAlatKerja = async (
       tahun_pembelian,
       harga_pembelian,
       kondisi,
+      pemegang,
       keterangan,
       id,
     ]

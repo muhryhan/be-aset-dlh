@@ -8,7 +8,6 @@ import acRepositori from "../repositori/ac-repositori.js";
 import image from "../helper/image.js";
 import qrcode from "../helper/qr.js";
 import dayjs from "dayjs";
-import e from "express";
 
 const getAlatKerja = async () => {
   const alatKerja = await alatKerjaRepositori.getAlatKerja();
@@ -32,6 +31,8 @@ const inputAlatKerja = async (namaGambar, bufferGambar, alatKerja) => {
   if (
     !namaGambar ||
     !bufferGambar ||
+    !alatKerja.kode_barang ||
+    !alatKerja.nama_barang ||
     !alatKerja.merek ||
     !alatKerja.no_registrasi ||
     !alatKerja.no_serial ||
@@ -39,6 +40,7 @@ const inputAlatKerja = async (namaGambar, bufferGambar, alatKerja) => {
     !alatKerja.tahun_pembelian ||
     !alatKerja.harga_pembelian ||
     !alatKerja.kondisi ||
+    !alatKerja.pemegang ||
     !alatKerja.keterangan
   ) {
     throw new Error("Data tidak lengkap");
@@ -95,6 +97,8 @@ const inputAlatKerja = async (namaGambar, bufferGambar, alatKerja) => {
   const alatKerjaBaru = await alatKerjaRepositori.createAlatKerja(
     uploadedQr,
     uploadedImage,
+    alatKerja.kode_barang,
+    alatKerja.nama_barang,
     alatKerja.merek,
     alatKerja.no_registrasi,
     alatKerja.no_serial,
@@ -102,6 +106,7 @@ const inputAlatKerja = async (namaGambar, bufferGambar, alatKerja) => {
     alatKerja.tahun_pembelian,
     alatKerja.harga_pembelian,
     alatKerja.kondisi,
+    alatKerja.pemegang,
     alatKerja.keterangan
   );
   return alatKerjaBaru;
@@ -109,6 +114,8 @@ const inputAlatKerja = async (namaGambar, bufferGambar, alatKerja) => {
 
 const updateAlatKerja = async (id, namaGambar, bufferGambar, alatKerja) => {
   if (
+    !alatKerja.kode_barang ||
+    !alatKerja.nama_barang ||
     !alatKerja.merek ||
     !alatKerja.no_registrasi ||
     !alatKerja.no_serial ||
@@ -116,6 +123,7 @@ const updateAlatKerja = async (id, namaGambar, bufferGambar, alatKerja) => {
     !alatKerja.tahun_pembelian ||
     !alatKerja.harga_pembelian ||
     !alatKerja.kondisi ||
+    !alatKerja.pemegang ||
     !alatKerja.keterangan
   ) {
     throw new Error("Data tidak lengkap");
@@ -206,6 +214,8 @@ const updateAlatKerja = async (id, namaGambar, bufferGambar, alatKerja) => {
     id,
     qrCodeBaru,
     gambarBaru,
+    alatKerja.kode_barang,
+    alatKerja.nama_barang,
     alatKerja.merek,
     alatKerja.no_registrasi,
     alatKerja.no_serial,
@@ -213,6 +223,7 @@ const updateAlatKerja = async (id, namaGambar, bufferGambar, alatKerja) => {
     alatKerja.tahun_pembelian,
     alatKerja.harga_pembelian,
     alatKerja.kondisi,
+    alatKerja.pemegang,
     alatKerja.keterangan
   );
   return alatKerjaBaru;

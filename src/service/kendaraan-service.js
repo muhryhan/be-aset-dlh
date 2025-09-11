@@ -29,6 +29,7 @@ const inputKendaraan = async (namaGambar, bufferGambar, kendaraan) => {
   if (
     !namaGambar ||
     !bufferGambar ||
+    !kendaraan.kode_barang ||
     !kendaraan.merek ||
     !kendaraan.no_polisi ||
     !kendaraan.no_mesin ||
@@ -103,6 +104,7 @@ const inputKendaraan = async (namaGambar, bufferGambar, kendaraan) => {
   return await kendaraanRepositori.createKendaraan(
     qrCode,
     uploadedImage,
+    kendaraan.kode_barang,
     kendaraan.merek,
     kendaraan.no_polisi,
     kendaraan.no_mesin,
@@ -122,6 +124,7 @@ const inputKendaraan = async (namaGambar, bufferGambar, kendaraan) => {
 // Memperbarui data kendaraan
 const updateKendaraan = async (id, namaGambar, bufferGambar, kendaraan) => {
   if (
+    !kendaraan.kode_barang ||
     !kendaraan.merek ||
     !kendaraan.no_polisi ||
     !kendaraan.no_mesin ||
@@ -233,6 +236,7 @@ const updateKendaraan = async (id, namaGambar, bufferGambar, kendaraan) => {
     id,
     qrCodeBaru,
     gambarBaru,
+    kendaraan.kode_barang,
     kendaraan.merek,
     kendaraan.no_polisi,
     kendaraan.no_mesin,

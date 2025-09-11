@@ -8,7 +8,6 @@ import kendaraanRepositori from "../repositori/kendaraan-repositori.js";
 import image from "../helper/image.js";
 import qrcode from "../helper/qr.js";
 import dayjs from "dayjs";
-import e from "express";
 
 const getAlatBerat = async () => {
   const result = await alatBeratRepositori.getAlatBerat();
@@ -32,6 +31,7 @@ const inputAlatBerat = async (namaGambar, bufferGambar, alatBerat) => {
   if (
     !namaGambar ||
     !bufferGambar ||
+    !alatBerat.kode_barang ||
     !alatBerat.merek ||
     !alatBerat.no_registrasi ||
     !alatBerat.no_mesin ||
@@ -99,6 +99,7 @@ const inputAlatBerat = async (namaGambar, bufferGambar, alatBerat) => {
   return await alatBeratRepositori.createAlatBerat(
     uploadedQR,
     uploadedImage,
+    alatBerat.kode_barang,
     alatBerat.merek,
     alatBerat.no_registrasi,
     alatBerat.no_mesin,
@@ -115,6 +116,7 @@ const inputAlatBerat = async (namaGambar, bufferGambar, alatBerat) => {
 
 const updateAlatBerat = async (id, namaGambar, bufferGambar, alatBerat) => {
   if (
+    !alatBerat.kode_barang ||
     !alatBerat.merek ||
     !alatBerat.no_registrasi ||
     !alatBerat.no_mesin ||
@@ -215,6 +217,7 @@ const updateAlatBerat = async (id, namaGambar, bufferGambar, alatBerat) => {
     id,
     qrCodeBaru,
     gambarBaru,
+    alatBerat.kode_barang,
     alatBerat.merek,
     alatBerat.no_registrasi,
     alatBerat.no_mesin,

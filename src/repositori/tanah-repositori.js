@@ -14,6 +14,7 @@ const getTanahById = async (id) => {
 
 const createTanah = async (
   gambar,
+  kode_barang,
   nama_barang,
   peruntukan,
   alamat,
@@ -28,13 +29,15 @@ const createTanah = async (
 ) => {
   return await conn.query(
     `INSERT INTO tanah (
-    gambar,  
+    gambar,
+    kode_barang,  
     nama_barang, peruntukan, alamat, luas, tahun_pengadaan,
       hak, tanggal_sertifikat, nomor_sertifikat, status_sertifikat,
       asal, harga
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       gambar,
+      kode_barang,
       nama_barang,
       peruntukan,
       alamat,
@@ -53,6 +56,7 @@ const createTanah = async (
 const updateTanah = async (
   id,
   gambar,
+  kode_barang,
   nama_barang,
   peruntukan,
   alamat,
@@ -67,13 +71,15 @@ const updateTanah = async (
 ) => {
   return await conn.query(
     `UPDATE tanah SET
-    gambar = ?,  
+    gambar = ?,
+    kode_barang = ?,
     nama_barang = ?, peruntukan = ?, alamat = ?, luas = ?, tahun_pengadaan = ?,
       hak = ?, tanggal_sertifikat = ?, nomor_sertifikat = ?, status_sertifikat = ?,
       asal = ?, harga = ?
     WHERE id_tanah = ?`,
     [
       gambar,
+      kode_barang,
       nama_barang,
       peruntukan,
       alamat,

@@ -118,7 +118,7 @@ userRouter.delete(
 // ============== Route AC ==============
 userRouter.get("/api/ac", authMiddleware, acController.getAc);
 userRouter.get(
-  "/api/ac/:no_serial",
+  "/api/ac/:no_registrasi",
   authMiddleware,
   acController.getAcByNoRegistrasi
 );

@@ -29,6 +29,8 @@ const inputAc = async (namaGambar, bufferGambar, ac) => {
   if (
     !namaGambar ||
     !bufferGambar ||
+    !ac.kode_barang ||
+    !ac.nama_barang ||
     !ac.merek ||
     !ac.no_registrasi ||
     !ac.no_serial ||
@@ -84,6 +86,8 @@ const inputAc = async (namaGambar, bufferGambar, ac) => {
   return await acRepositori.createAc(
     uploadedQr,
     uploadedImage,
+    ac.kode_barang,
+    ac.nama_barang,
     ac.merek,
     ac.no_registrasi,
     ac.no_serial,
@@ -99,6 +103,8 @@ const inputAc = async (namaGambar, bufferGambar, ac) => {
 
 const updateAc = async (id, namaGambar, bufferGambar, ac) => {
   if (
+    !ac.kode_barang ||
+    !ac.nama_barang ||
     !ac.merek ||
     !ac.no_registrasi ||
     !ac.no_serial ||
@@ -193,6 +199,8 @@ const updateAc = async (id, namaGambar, bufferGambar, ac) => {
     id,
     qrBaru,
     gambarBaru,
+    ac.kode_barang,
+    ac.nama_barang,
     ac.merek,
     ac.no_registrasi,
     ac.no_serial,

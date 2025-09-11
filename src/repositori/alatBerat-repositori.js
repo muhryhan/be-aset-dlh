@@ -1,5 +1,4 @@
 import conn from "../application/db.js";
-import qr from "../helper/qr.js";
 
 const getAlatBerat = async () => {
   const [rows] = await conn.query(
@@ -27,6 +26,7 @@ const getAlatBeratByNoRegistrasi = async (no_registrasi) => {
 const createAlatBerat = async (
   qrcode,
   gambar,
+  kode_barang,
   merek,
   no_registrasi,
   no_mesin,
@@ -40,10 +40,11 @@ const createAlatBerat = async (
   kondisi
 ) => {
   return await conn.query(
-    "INSERT INTO alatberat (qrcode, gambar, merek, no_registrasi, no_mesin, no_rangka, warna, harga_pembelian, tahun_pembuatan, kategori, pajak, penggunaan, kondisi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    "INSERT INTO alatberat (qrcode, gambar, kode_barang, merek, no_registrasi, no_mesin, no_rangka, warna, harga_pembelian, tahun_pembuatan, kategori, pajak, penggunaan, kondisi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
     [
       qrcode,
       gambar,
+      kode_barang,
       merek,
       no_registrasi,
       no_mesin,
@@ -63,6 +64,7 @@ const updateAlatBerat = async (
   id,
   qrcode,
   gambar,
+  kode_barang,
   merek,
   no_registrasi,
   no_mesin,
@@ -76,10 +78,11 @@ const updateAlatBerat = async (
   kondisi
 ) => {
   return await conn.query(
-    "UPDATE alatberat SET qrcode = ?, gambar = ?, merek = ?, no_registrasi = ?, no_mesin = ?, no_rangka = ?, warna = ?, harga_pembelian = ?, tahun_pembuatan = ?, kategori = ?, pajak = ?, penggunaan = ?, kondisi = ? WHERE id_alatberat = ?",
+    "UPDATE alatberat SET qrcode = ?, gambar = ?, kode_barang = ?, merek = ?, no_registrasi = ?, no_mesin = ?, no_rangka = ?, warna = ?, harga_pembelian = ?, tahun_pembuatan = ?, kategori = ?, pajak = ?, penggunaan = ?, kondisi = ? WHERE id_alatberat = ?",
     [
       qrcode,
       gambar,
+      kode_barang,
       merek,
       no_registrasi,
       no_mesin,
