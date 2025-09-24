@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Sep 2025 pada 19.47
+-- Waktu pembuatan: 24 Sep 2025 pada 19.34
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -80,7 +80,7 @@ INSERT INTO `ac` (`id_ac`, `qrcode`, `gambar`, `kode_barang`, `nama_barang`, `me
 (33, '1757341233514-AC2-0013.png', '1757341233550-AC2-0013.jpg', '02.06.02.04.003', 'AC Split', 'Polytron', 'AC2-0013', '23B00550', '1 PK', 'Default Ruangan', 'Pembelian', '2013', 4893750, 'Baik', 'Default Keterangan'),
 (34, '1757341233593-AC2-0014.png', '1757341233626-AC2-0014.jpg', '02.06.02.04.003', 'AC Split', 'Polytron', 'AC2-0014', '23B00545', '1 PK', 'Default Ruangan', 'Pembelian', '2013', 4893750, 'Baik', 'Default Keterangan'),
 (35, '1757341233673-AC2-0015.png', '1757341233718-AC2-0015.jpg', '02.06.02.04.003', 'AC Split', 'Sharp', 'AC2-0015', '3472740017035', '1 PK', 'Default Ruangan', 'Pembelian', '2015', 5028700, 'Baik', 'Default Keterangan'),
-(36, '1757341233766-AC2-0016.png', '1757341233807-AC2-0016.jpg', '02.06.02.04.003', 'AC Split', 'Panasonic', 'AC2-0016', '7157410258', '1½ PK', 'Default Ruangan', 'Pembelian', '2008', 7500000, 'Baik', 'Default Keterangan'),
+(36, '1757341233766-AC2-0016.png', '1757560918963-ac.png', '02.06.02.04.007', 'AC Split', 'Panasonic', 'AC2-0016', '7157410258', '1½ PK', 'Default Ruangan', 'Pembelian', '2008', 7500000, 'Baik', 'Default Keterangan'),
 (37, '1757341233850-AC0018.png', '1757341233887-AC0018.jpg', '02.06.02.04.003', 'AC Split', 'Sharp', 'AC0018', '116447', '1 PK', 'Default Ruangan', 'Pembelian', '2010', 4500000, 'Baik', 'Default Keterangan'),
 (38, '1757341233933-AC0019.png', '1757341233978-AC0019.jpg', '02.06.02.04.003', 'AC Split', 'Sharp', 'AC0019', '9123278', '1 PK', 'Default Ruangan', 'Pembelian', '2010', 4500000, 'Baik', 'Default Keterangan'),
 (39, '1757341234017-AC0020.png', '1757341234053-AC0020.jpg', '02.06.02.04.003', 'AC Split', 'Sharp', 'AC0020', '9102520', '2 PK', 'Default Ruangan', 'Pembelian', '2010', 7250000, 'Baik', 'Default Keterangan'),
@@ -123,7 +123,7 @@ INSERT INTO `alatberat` (`id_alatberat`, `qrcode`, `gambar`, `kode_barang`, `mer
 (16, '1757335357243-AB0005.png', '1757335357299-AB0005.jpg', '1.3.1.02.01.04.001', 'Jhon Deere 310J', 'AB0005', '12DEFAULTNM', '1T0310JXCB 206170', 'Hitam', 15000000, '2001', 'Beachoe Loader', '0000-00-00', 'Operasional Bidang Persampahan', 'Rusak Ringan'),
 (17, '1757335357360-AB0006.png', '1757335357409-AB0006.jpg', '1.3.1.02.01.04.001', 'Volvo', 'AB0006', '12DEFAULTNM', '12DEFAULTNR', 'Hitam', 15000000, '2001', 'Excavator', '0000-00-00', 'Operasional UPTD TPA', 'Baik'),
 (18, '1757335357503-AB0007.png', '1757335357561-AB0007.jpg', '1.3.1.02.01.04.001', 'Caterpilar', 'AB0007', '12DEFAULTNM', '12DEFAULTNR', 'Hitam', 15000000, '2001', 'Excavator', '0000-00-00', 'Operasional UPTD TPA', 'Rusak Ringan'),
-(19, '1757335357612-AB0008.png', '1757335357655-AB0008.jpg', '1.3.1.02.01.04.001', 'HAKO City Master 1250 MP ', 'AB0008', '12DEFAULTNM', '12DEFAULTNR', 'Hitam', 15000000, '2001', 'Road Sweeper', '0000-00-00', 'Operasional UPTD TPA', 'Baik');
+(19, '1757335357612-AB0008.png', '1758727610825-alatberat.png', '1.3.1.02.01.04.003', 'HAKO City Master 1250 MP ', 'AB0008', '12DEFAULTNM', '12DEFAULTNR', 'Hitam', 15000000, '2001', 'Road Sweeper', '2020-02-20', 'Operasional UPTD TPA', 'Baik');
 
 -- --------------------------------------------------------
 
@@ -197,7 +197,7 @@ INSERT INTO `alatkerja` (`id_alatkerja`, `qrcode`, `gambar`, `kode_barang`, `nam
 (47, '1757341207296-AK2-0036.png', '1757341207337-AK2-0036.jpg', '1.3.1.02.01.04.001', 'Mesin potong rumput', 'Matsumoto Platinum / YX35', 'AK2-0036', '-07', 'Pembelian', '2021', 5000000, 'Rusak Ringan', 'Kantor DLH', 'Default Keterangan'),
 (48, '1757341207388-AK2-0037.png', '1757341207428-AK2-0037.jpg', '1.3.1.02.01.04.001', 'Mesin potong rumput', 'Matsumoto Platinum / YX35', 'AK2-0037', '-08', 'Pembelian', '2021', 5000000, 'Rusak Ringan', 'Kantor DLH', 'Default Keterangan'),
 (49, '1757341207477-AK2-0038.png', '1757341207517-AK2-0038.jpg', '1.3.1.02.01.04.001', 'Mesin potong rumput', 'HONDA / GX 35', 'AK2-0038', 'GCAMT-7038833', 'Pembelian', '2022', 5500000, 'Baik', 'Kantor DLH', 'Default Keterangan'),
-(50, '1757341207565-AK2-0039.png', '1757341207609-AK2-0039.jpg', '1.3.1.02.01.04.001', 'Mesin potong rumput', 'HONDA / GX35T', 'AK2-0039', 'HAAN-0009940', 'Pembelian', '2022', 5500000, 'Baik', 'Kantor DLH', 'Default Keterangan'),
+(50, '1757341207565-AK2-0039.png', '1757560144046-alatkerja.png', '1.3.1.02.01.04.004', 'Mesin potong rumput', 'HONDA / GX35T', 'AK2-0039', 'HAAN-0009940', 'Pembelian', '2022', 5500000, 'Baik', 'Kantor DLH', 'Default Keterangan'),
 (51, '1757341207655-AK0040.png', '1757341207697-AK0040.jpg', '1.3.1.02.01.04.001', 'Mesin potong rumput', 'HONDA / GX35T', 'AK0040', 'HAAN-0014298', 'Pembelian', '2022', 5500000, 'Baik', 'Kantor DLH', 'Default Keterangan'),
 (52, '1757341207750-AK0041.png', '1757341207791-AK0041.jpg', '1.3.1.02.01.04.001', 'Mesin potong rumput', 'HONDA / GX35T', 'AK0041', 'GCAMT-7403176', 'Pembelian', '2022', 11000000, 'Baik', 'Kantor DLH', 'Default Keterangan'),
 (53, '1757341207838-AK0042.png', '1757341207886-AK0042.jpg', '1.3.1.02.01.04.001', 'Mesin potong rumput', 'HONDA / GX35T', 'AK0042', 'GCAMT-7403178', 'Pembelian', '2022', 11000000, 'Baik', 'Kantor DLH', 'Default Keterangan');
@@ -233,7 +233,7 @@ CREATE TABLE `kendaraan` (
 --
 
 INSERT INTO `kendaraan` (`id_kendaraan`, `qrcode`, `gambar`, `kode_barang`, `merek`, `no_polisi`, `no_mesin`, `no_rangka`, `warna`, `harga_pembelian`, `tahun_pembuatan`, `kategori`, `pajak`, `pemegang`, `nik`, `penggunaan`, `kondisi`) VALUES
-(8, '1756966691970-DN 3745 A.png', '1756966694337-DN_3745_A.jpg', '1.3.1.02.01.04.001', 'Honda Vario / Ati 1121Bo1 A/T', 'DN 3745 A', 'JFH1E-1294301', 'MH1JFH111 EK293938', 'Hitam', 15000000, '2001', 'R2', '0000-00-00', 'TPA', '720404010', 'Operasional UPTD TPA', 'Baik'),
+(8, '1756966691970-DN 3745 A.png', '1758719260084-motor.png', '1.3.1.02.01.04.002', 'Honda Vario / Ati 1121Bo1 A/T', 'DN 3745 A', 'JFH1E-1294301', 'MH1JFH111 EK293938', 'Hitam', 15000000, '2001', 'R2', '2020-01-07', 'TPA', '720404010', 'Operasional UPTD TPA', 'Baik'),
 (9, '1756966694397-DN 3743 A.png', '1756966694434-DN_3743_A.jpg', '1.3.1.02.01.04.001', 'Honda Vario / Ati 1121B 01 A/T', 'DN 3743 A', 'JFH1E-1281323', 'MH1JFH112EK284049', 'Hitam', 15000000, '2001', 'R2', '0000-00-00', 'Amran Isnauna', '720404010', 'Operasional Kasubag Kepegawaian', 'Baik'),
 (10, '1756966694498-DN 4958 A.png', '1756966694534-DN_4958_A.jpg', '1.3.1.02.01.04.001', 'Suzuki Shogun/ Fl 125 RCD', 'DN 4958 A', 'F496-455317', 'MH8BF45SAEJ-185802', 'Hitam', 15000000, '2001', 'R2', '0000-00-00', 'Mirwan', '720404010', 'Operasional Bidang Persampahan', 'Baik'),
 (11, '1756966694591-DN 5697 A.png', '1756966694630-DN_5697_A.jpg', '1.3.1.02.01.04.001', 'Jupiter Mx 135 CC', 'DN 5697 A', '2S6-135379', 'MH32S60016K134973', 'Hitam', 15000000, '2001', 'R2', '0000-00-00', 'Usran', '720404010', 'Operasional Bidang Persampahan', 'Baik'),
@@ -419,7 +419,8 @@ INSERT INTO `kendaraan` (`id_kendaraan`, `qrcode`, `gambar`, `kode_barang`, `mer
 (190, '1756968007642-DN 8721 A.png', '1756968007683-DN_8721_A.jpg', '1.3.1.02.01.04.001', 'Toyota Dyna 110 ET Arm Roll + Cat', 'DN 8721 A', 'W04DT-PJ59365', 'MHC1JU41F5129311', 'Hitam', 0, '2001', 'R6', '0000-00-00', 'Dinas', '720404010', 'Operasional Bidang Persampahan', 'Baik'),
 (191, '1756968007737-DN 8719 A.png', '1756968007778-DN_8719_A.jpg', '1.3.1.02.01.04.001', 'Toyota Dyna 110 ET Arm Roll + Cat', 'DN 8719 A', 'W04DT-PJ59364', 'MHC1JU41F5129310', 'Hitam', 0, '2001', 'R6', '0000-00-00', 'Dinas', '720404010', 'Operasional Bidang Persampahan', 'Baik'),
 (192, '1756968007825-DN 9800 A.png', '1756968007858-DN_9800_A.jpg', '1.3.1.02.01.04.001', 'Truck Crane Korerasi Dyna 110', 'DN 9800 A', 'W04DT-PJ59460', 'MHC1JUX1F5025346', 'Hitam', 0, '2001', 'R6', '0000-00-00', 'Dinas', '720404010', 'Operasional Penebangan (RTH)', 'Baik'),
-(193, '1756968007908-DN 8429 A.png', '1756968007952-DN_8429_A.jpg', '1.3.1.02.01.04.001', 'Truk Crane Skylift Hino/ Dutro', 'DN 8429 A', 'N04CWYJ23530', 'MJECCB2F7P5013184', 'Hitam', 0, '2001', 'R6', '0000-00-00', 'Dinas', '720404010', 'Operasional Penebangan (RTH)', 'Baik');
+(193, '1756968007908-DN 8429 A.png', '1756968007952-DN_8429_A.jpg', '1.3.1.02.01.04.001', 'Truk Crane Skylift Hino/ Dutro', 'DN 8429 A', 'N04CWYJ23530', 'MJECCB2F7P5013184', 'Hitam', 0, '2001', 'R6', '0000-00-00', 'Dinas', '720404010', 'Operasional Penebangan (RTH)', 'Baik'),
+(196, '1758726448566-DD 0101 DD.png', '1758732061542-motor.png', '1.3.1.02.01.04.005', 'RX King', 'DD 0101 DD', 'DJHJ54357453454HFKSF', 'SDF29472342432YGY', 'Hitam', 25000000, '2022', 'R2', '2027-05-20', 'Ryhan', '7202040092332', 'Perjalanan dinas haha', 'Baik');
 
 -- --------------------------------------------------------
 
@@ -434,6 +435,17 @@ CREATE TABLE `onderdil` (
   `jumlah` int(255) NOT NULL,
   `harga` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `onderdil`
+--
+
+INSERT INTO `onderdil` (`id_onderdil`, `id_servis`, `nama_onderdil`, `jumlah`, `harga`) VALUES
+(24, 8, 'oli_mesin', 1, 65000),
+(25, 8, 'ban', 2, 500000),
+(26, 8, 'lampu depan', 1, 100000),
+(31, 7, 'oli_mesin', 4, 240000),
+(32, 7, 'kap', 4, 100000);
 
 -- --------------------------------------------------------
 
@@ -452,7 +464,7 @@ CREATE TABLE `serberac` (
 --
 
 INSERT INTO `serberac` (`id_serberac`, `no_registrasi`, `cuci`) VALUES
-(4, 'AC1-0002', '2025-09-08'),
+(4, 'AC1-0002', '2025-03-01'),
 (5, 'AC1-0001', '2025-09-08'),
 (6, 'AC1-0003', '2025-09-08'),
 (7, 'AC1-0004', '2025-09-08'),
@@ -507,8 +519,8 @@ CREATE TABLE `serberalatberat` (
 --
 
 INSERT INTO `serberalatberat` (`id_serberalatberat`, `no_registrasi`, `oli_mesin`, `filter_oli_mesin`) VALUES
-(3, 'AB0001', '2025-09-08', '2025-09-08'),
-(4, 'AB0002', '2025-09-08', '2025-09-08'),
+(3, 'AB0001', '2025-09-11', '2025-09-08'),
+(4, 'AB0002', '2025-09-06', '2025-09-06'),
 (5, 'AB0003', '2025-09-08', '2025-09-08'),
 (6, 'AB0004', '2025-09-08', '2025-09-08'),
 (7, 'AB0005', '2025-09-08', '2025-09-08'),
@@ -533,7 +545,7 @@ CREATE TABLE `serberalatkerja` (
 --
 
 INSERT INTO `serberalatkerja` (`id_serberalatkerja`, `no_registrasi`, `oli_mesin`) VALUES
-(4, 'AK1-0019', '2025-09-08'),
+(4, 'AK1-0019', '2025-07-11'),
 (5, 'AK1-0020', '2025-09-08'),
 (6, 'AK1-0021', '2025-09-08'),
 (7, 'AK1-0022', '2025-09-08'),
@@ -603,8 +615,8 @@ CREATE TABLE `serberkendaraan` (
 --
 
 INSERT INTO `serberkendaraan` (`id_serberkendaraan`, `no_polisi`, `oli_mesin`, `filter_oli_mesin`, `oli_gardan`, `oli_transmisi`, `ban`) VALUES
-(8, 'DN 3745 A', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04'),
-(9, 'DN 3743 A', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04'),
+(8, 'DN 3745 A', '2025-02-20', '2021-04-08', '2025-02-05', '2025-04-10', '2025-02-07'),
+(9, 'DN 3743 A', '2025-09-05', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04'),
 (10, 'DN 4958 A', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04'),
 (11, 'DN 5697 A', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04'),
 (12, 'DN 3407 A', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04'),
@@ -788,7 +800,8 @@ INSERT INTO `serberkendaraan` (`id_serberkendaraan`, `no_polisi`, `oli_mesin`, `
 (190, 'DN 8721 A', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04'),
 (191, 'DN 8719 A', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04'),
 (192, 'DN 9800 A', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04'),
-(193, 'DN 8429 A', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04');
+(193, 'DN 8429 A', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04', '2025-09-04'),
+(204, 'DD 0101 DD', '2025-09-20', '2025-09-25', '2025-09-25', '2025-09-25', '2025-09-20');
 
 -- --------------------------------------------------------
 
@@ -805,6 +818,14 @@ CREATE TABLE `servis` (
   `nota_pembayaran` varchar(255) NOT NULL,
   `dokumentasi` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `servis`
+--
+
+INSERT INTO `servis` (`id_servis`, `tanggal`, `no_unik`, `nama_bengkel`, `biaya_servis`, `nota_pembayaran`, `dokumentasi`) VALUES
+(7, '2025-02-20', 'DN 3745 A', 'Akai', 200000, '1758718942072-Screenshot (9).png', '1758718942179-Screenshot (9).png'),
+(8, '2025-09-23', 'DD 0101 DD', 'Akai', 200000, '1758726615370-alatberat.png', '1758726615440-alatkerja.png');
 
 -- --------------------------------------------------------
 
@@ -834,14 +855,14 @@ CREATE TABLE `tanah` (
 --
 
 INSERT INTO `tanah` (`id_tanah`, `gambar`, `kode_barang`, `nama_barang`, `peruntukan`, `alamat`, `luas`, `tahun_pengadaan`, `hak`, `tanggal_sertifikat`, `nomor_sertifikat`, `status_sertifikat`, `asal`, `harga`) VALUES
-(5, '1757382722634-Tanah_Bangunan_Kantor.jpg', '1.3.1.02.01.04.001', 'Tanah Bangunan Kantor', 'Kantor Dinas Lingkungan Hidup', 'Jl. Kakatua No. 09 Kel. Tanamodindi', 662, '1995', 'Hak Pakai', '0000-00-00', '19.05.03.05.4.00048  AU 394874', 'Sudah', 'Hibah', 937392000),
-(6, '1757382722942-Tanah_Taman.jpg', '1.3.1.02.01.04.001', 'Tanah Taman', 'Taman Segitiga Masomba (Depan Eks Mall)', 'Jin. W Monginsidi', 88, '2005', 'Hak Pakai', '0000-00-00', '19.05.01.10.4.00096 AAU 376425', 'Sudah', 'Hibah', 26792000),
-(7, '1757382723307-Tanah_Taman.jpg', '1.3.1.02.01.04.001', 'Tanah Taman', 'Taman Bundaran Bumi nyiur', 'Jln. Bumi Nyiur', 659, '2005', 'Hak Pakai', '0000-00-00', '19.05.01.06.4.00252 AAH 939895', 'Sudah', 'Hibah', 35200000),
-(8, '1757382723407-Tanah_Taman.jpg', '1.3.1.02.01.04.001', 'Tanah Taman', 'Taman Bundaran STQ', 'Jln. Sukarno Hata', 1678, '2005', 'Hak Pakai', '0000-00-00', '19.05.08.03.4.00061 AAH 945868', 'Sudah', 'Hibah', 160000000),
-(9, '1757382723732-Tanah_Bangunan_Laboratorium.jpg', '1.3.1.02.01.04.001', 'Tanah Bangunan Laboratorium', 'Laboratorium DLH', 'Jln. Pipit No.01', 320, '2006', 'Hak Pakai', '2004-08-07', '19.05.03.05.4.00053  BE 435495', 'Sudah', 'Hibah', 377067000),
-(10, '1757382723786-Tanah_Kosong.jpg', '1.3.1.02.01.04.001', 'Tanah Kosong', 'RTH Pantoloan', 'Kel. Pantoloan', 499, '1995', 'Hak Pakai', '0000-00-00', '19.05.07.08.4.00018 AAE 048950', 'Sudah', 'Hibah', 63872000),
-(11, '1757382723829-Tanah_Taman.jpg', '1.3.1.02.01.04.001', 'Tanah Taman', 'Taman Vatulemo', 'Watulemo', 2000, '2005', 'Hak Pakai', '0000-00-00', '19.05.03.05.4.00043 AS 137233', 'Sudah', 'Hibah', 486000000),
-(12, '1757382723872-Tanah_TPA.jpg', '1.3.1.02.01.04.001', 'Tanah TPA', 'TPA  Kawatuna. \r\r\nSertifikat Luas 5 Hektar', 'Kawatuna', 250000, '2005', 'Hak Pakai', '0000-00-00', '19.05.03.04.4.00048 AU 411069', 'Sudah', 'Hibah', 1787500000),
+(5, '1758719799308-tanah.png', '1.3.1.02.01.04.005', 'Tanah Bangunan Kantor', 'Kantor Dinas Lingkungan Hidup', 'Jl. Kakatua No. 09 Kel. Tanamodindi', 662, '1995', 'Hak Pakai', '2003-03-29', '19.05.03.05.4.00048  AU 394874', 'Sudah', 'Hibah', 937392000),
+(6, '1758719770013-tanah.png', '1.3.1.02.01.04.001', 'Tanah Taman', 'Taman Segitiga Masomba (Depan Eks Mall)', 'Jin. W Monginsidi', 88, '2005', 'Hak Pakai', '2021-04-28', '19.05.01.10.4.00096 AAU 376425', 'Sudah', 'Hibah', 26792000),
+(7, '1758719854428-tanah.png', '1.3.1.02.01.04.001', 'Tanah Taman', 'Taman Bundaran Bumi nyiur', 'Jln. Bumi Nyiur', 659, '2005', 'Hak Pakai', '2019-09-10', '19.05.01.06.4.00252 AAH 939895', 'Sudah', 'Hibah', 35200000),
+(8, '1757382723407-Tanah_Taman.jpg', '1.3.1.02.01.04.001', 'Tanah Taman', 'Taman Bundaran STQ', 'Jln. Sukarno Hata', 1678, '2005', 'Hak Pakai', '2021-12-30', '19.05.08.03.4.00061 AAH 945868', 'Sudah', 'Hibah', 160000000),
+(9, '1758719958014-tanah.png', '1.3.1.02.01.04.001', 'Tanah Bangunan Laboratorium', 'Laboratorium DLH', 'Jln. Pipit No.01', 320, '2006', 'Hak Pakai', '2011-09-21', '19.05.03.05.4.00053  BE 435495', 'Sudah', 'Hibah', 377067000),
+(10, '1758720002100-tanah.png', '1.3.1.02.01.04.001', 'Tanah Kosong', 'RTH Pantoloan', 'Kel. Pantoloan', 499, '1995', 'Hak Pakai', '2019-10-11', '19.05.07.08.4.00018 AAE 048950', 'Sudah', 'Hibah', 63872000),
+(11, '1758720072630-tanah.png', '1.3.1.02.01.04.001', 'Tanah Taman', 'Taman Vatulemo', 'Watulemo', 2000, '2005', 'Hak Pakai', '2002-12-02', '19.05.03.05.4.00043 AS 137233', 'Sudah', 'Hibah', 486000000),
+(12, '1758720198031-tanah.png', '1.3.1.02.01.04.001', 'Tanah TPA', 'TPA  Kawatuna. \r\n\r\nSertifikat Luas 5 Hektar', 'Kawatuna', 250000, '2005', 'Hak Pakai', '2003-11-18', '19.05.03.04.4.00048 AU 411069', 'Sudah', 'Hibah', 1787500000),
 (14, '1757383238964-Tanah_TPU.jpg', '1.3.1.02.01.04.001', 'Tanah TPU', 'TPU Poboya', 'Poboya', 30000, '2005', 'Hak Pakai', '0000-00-00', 'Belum', 'Belum', 'Hibah', 2147483647),
 (15, '1757383239243-Tanah_TPU.jpg', '1.3.1.02.01.04.001', 'Tanah TPU', 'TPU Lambara', 'Lambara', 2500, '2005', 'Hak Pakai', '0000-00-00', 'Belum', 'Belum', 'Hibah', 25000000),
 (16, '1757383240693-Tanah_TPU.jpg', '1.3.1.02.01.04.001', 'Tanah TPU', 'TPU Tavanjuka', 'Lrg. Sumur Buvuoge Kel. Tawanjuka Kec. Tatanga', 1180, '2021', 'Default', '0000-00-00', 'Belum', 'Belum', 'Pembelian', 244600000),
@@ -1041,7 +1062,7 @@ ALTER TABLE `ac`
 -- AUTO_INCREMENT untuk tabel `alatberat`
 --
 ALTER TABLE `alatberat`
-  MODIFY `id_alatberat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_alatberat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT untuk tabel `alatkerja`
@@ -1053,13 +1074,13 @@ ALTER TABLE `alatkerja`
 -- AUTO_INCREMENT untuk tabel `kendaraan`
 --
 ALTER TABLE `kendaraan`
-  MODIFY `id_kendaraan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
+  MODIFY `id_kendaraan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
 
 --
 -- AUTO_INCREMENT untuk tabel `onderdil`
 --
 ALTER TABLE `onderdil`
-  MODIFY `id_onderdil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_onderdil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT untuk tabel `serberac`
@@ -1071,7 +1092,7 @@ ALTER TABLE `serberac`
 -- AUTO_INCREMENT untuk tabel `serberalatberat`
 --
 ALTER TABLE `serberalatberat`
-  MODIFY `id_serberalatberat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_serberalatberat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `serberalatkerja`
@@ -1083,13 +1104,13 @@ ALTER TABLE `serberalatkerja`
 -- AUTO_INCREMENT untuk tabel `serberkendaraan`
 --
 ALTER TABLE `serberkendaraan`
-  MODIFY `id_serberkendaraan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
+  MODIFY `id_serberkendaraan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
 
 --
 -- AUTO_INCREMENT untuk tabel `servis`
 --
 ALTER TABLE `servis`
-  MODIFY `id_servis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_servis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `tanah`
@@ -1101,7 +1122,25 @@ ALTER TABLE `tanah`
 -- AUTO_INCREMENT untuk tabel `tanaman`
 --
 ALTER TABLE `tanaman`
-  MODIFY `id_tanaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_tanaman` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `tanamankeluar`
+--
+ALTER TABLE `tanamankeluar`
+  MODIFY `id_tanamankeluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `tanamanmasuk`
+--
+ALTER TABLE `tanamanmasuk`
+  MODIFY `id_tanamanmasuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `user`
+--
+ALTER TABLE `user`
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

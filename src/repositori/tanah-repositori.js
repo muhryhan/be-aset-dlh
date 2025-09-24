@@ -34,7 +34,7 @@ const createTanah = async (
     nama_barang, peruntukan, alamat, luas, tahun_pengadaan,
       hak, tanggal_sertifikat, nomor_sertifikat, status_sertifikat,
       asal, harga
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       gambar,
       kode_barang,

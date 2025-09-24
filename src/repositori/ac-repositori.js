@@ -36,7 +36,7 @@ const createAc = async (
   keterangan
 ) => {
   return await conn.query(
-    "INSERT INTO ac (qrcode, gambar, kode_barang, nama_barang, merek, no_registrasi, no_serial, ukuran, ruangan, asal, tahun_pembelian, harga_pembelian, kondisi, keterangan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    "INSERT INTO ac (qrcode, gambar, kode_barang, nama_barang, merek, no_registrasi, no_serial, ukuran, ruangan, asal, tahun_pembelian, harga_pembelian, kondisi, keterangan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
     [
       qrcode,
       gambar,

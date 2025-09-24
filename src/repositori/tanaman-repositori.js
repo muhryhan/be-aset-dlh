@@ -22,7 +22,7 @@ const createTanaman = async (
   keterangan
 ) => {
   return await conn.query(
-    "INSERT INTO tanaman (gambar, kode_barang, nama, jenis, stok, keterangan) VALUES (?, ?, ?, ?, ?)",
+    "INSERT INTO tanaman (gambar, kode_barang, nama, jenis, stok, keterangan) VALUES (?, ?, ?, ?, ?, ?)",
     [gambar, kode_barang, nama, jenis, stok, keterangan]
   );
 };

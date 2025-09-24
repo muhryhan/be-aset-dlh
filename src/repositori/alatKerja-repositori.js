@@ -39,7 +39,7 @@ const createAlatKerja = async (
   keterangan
 ) => {
   return await conn.query(
-    "INSERT INTO alatkerja (qrcode, gambar, kode_barang, nama_barang, merek, no_registrasi, no_serial, asal, tahun_pembelian, harga_pembelian, kondisi, pemegang, keterangan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    "INSERT INTO alatkerja (qrcode, gambar, kode_barang, nama_barang, merek, no_registrasi, no_serial, asal, tahun_pembelian, harga_pembelian, kondisi, pemegang, keterangan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
     [
       qrcode,
       gambar,

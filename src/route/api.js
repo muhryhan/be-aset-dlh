@@ -29,6 +29,11 @@ userRouter.put("/api/user/:id", authMiddleware, userController.updateUser);
 userRouter.delete("/api/user/:id", authMiddleware, userController.deleteUser);
 userRouter.post("/api/logout", authMiddleware, userController.logout);
 
+// ============== Route Check-Token ==============
+userRouter.get("/check-token", authMiddleware, (req, res) => {
+  res.json({ valid: true });
+});
+
 // ============== Route Kendaraan ==============
 userRouter.get(
   "/api/kendaraan",

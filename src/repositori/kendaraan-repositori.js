@@ -40,7 +40,7 @@ const createKendaraan = async (
   kondisi
 ) => {
   return await conn.query(
-    "INSERT INTO kendaraan (qrcode, gambar, kode_barang, merek, no_polisi, no_mesin, no_rangka, warna, harga_pembelian, tahun_pembuatan, kategori, pajak, pemegang, nik, penggunaan, kondisi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    "INSERT INTO kendaraan (qrcode, gambar, kode_barang, merek, no_polisi, no_mesin, no_rangka, warna, harga_pembelian, tahun_pembuatan, kategori, pajak, pemegang, nik, penggunaan, kondisi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
     [
       qrcode,
       gambar,
