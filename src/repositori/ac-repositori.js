@@ -22,6 +22,7 @@ const getAcByNoRegistrasi = async (no_registrasi) => {
 const createAc = async (
   qrcode,
   gambar,
+  aset,
   kode_barang,
   nama_barang,
   merek,
@@ -35,25 +36,25 @@ const createAc = async (
   kondisi,
   keterangan
 ) => {
-  return await conn.query(
-    "INSERT INTO ac (qrcode, gambar, kode_barang, nama_barang, merek, no_registrasi, no_serial, ukuran, ruangan, asal, tahun_pembelian, harga_pembelian, kondisi, keterangan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-    [
-      qrcode,
-      gambar,
-      kode_barang,
-      nama_barang,
-      merek,
-      no_registrasi,
-      no_serial,
-      ukuran,
-      ruangan,
-      asal,
-      tahun_pembelian,
-      harga_pembelian,
-      kondisi,
-      keterangan,
-    ]
-  );
+  const sql = `
+  INSERT INTO ac (qrcode, gambar, id_aset, kode_barang, nama_barang, merek, no_registrasi, no_serial, ukuran, ruangan, asal, tahun_pembelian, harga_pembelian, kondisi, keterangan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+  await conn.query(sql, [
+    qrcode,
+    gambar,
+    aset,
+    kode_barang,
+    nama_barang,
+    merek,
+    no_registrasi,
+    no_serial,
+    ukuran,
+    ruangan,
+    asal,
+    tahun_pembelian,
+    harga_pembelian,
+    kondisi,
+    keterangan,
+  ]);
 };
 
 const updateAc = async (

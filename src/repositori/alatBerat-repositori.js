@@ -26,6 +26,7 @@ const getAlatBeratByNoRegistrasi = async (no_registrasi) => {
 const createAlatBerat = async (
   qrcode,
   gambar,
+  aset,
   kode_barang,
   merek,
   no_registrasi,
@@ -39,25 +40,29 @@ const createAlatBerat = async (
   penggunaan,
   kondisi
 ) => {
-  return await conn.query(
-    "INSERT INTO alatberat (qrcode, gambar, kode_barang, merek, no_registrasi, no_mesin, no_rangka, warna, harga_pembelian, tahun_pembuatan, kategori, pajak, penggunaan, kondisi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-    [
-      qrcode,
-      gambar,
-      kode_barang,
-      merek,
-      no_registrasi,
-      no_mesin,
-      no_rangka,
-      warna,
-      harga_pembelian,
-      tahun_pembuatan,
-      kategori,
-      pajak,
-      penggunaan,
-      kondisi,
-    ]
-  );
+  const sql = `
+  INSERT INTO alatberat (qrcode, gambar, id_aset, 
+  kode_barang, merek, no_registrasi, no_mesin, no_rangka, 
+  warna, harga_pembelian, tahun_pembuatan, kategori, pajak, 
+  penggunaan, kondisi) 
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+  await conn.query(sql, [
+    qrcode,
+    gambar,
+    aset,
+    kode_barang,
+    merek,
+    no_registrasi,
+    no_mesin,
+    no_rangka,
+    warna,
+    harga_pembelian,
+    tahun_pembuatan,
+    kategori,
+    pajak,
+    penggunaan,
+    kondisi,
+  ]);
 };
 
 const updateAlatBerat = async (

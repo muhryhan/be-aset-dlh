@@ -5,6 +5,11 @@ import servisBerkalaAlatBeratRepositori from "../repositori/servisBerkalaAlatBer
 import acRepositori from "../repositori/ac-repositori.js";
 import alatKerjaRepositori from "../repositori/alatKerja-repositori.js";
 import kendaraanRepositori from "../repositori/kendaraan-repositori.js";
+import {
+  createAset,
+  deleteAset,
+  updateAset,
+} from "../repositori/aset-repositori.js";
 import image from "../helper/image.js";
 import qrcode from "../helper/qr.js";
 import dayjs from "dayjs";
@@ -44,7 +49,7 @@ const inputAlatBerat = async (namaGambar, bufferGambar, alatBerat) => {
     !alatBerat.penggunaan ||
     !alatBerat.kondisi
   ) {
-    throw new Error("Data tidak lengkap");
+    throw new Error("Data alat berat tidak lengkap");
   }
 
   const existingAlatBerat =
@@ -52,14 +57,14 @@ const inputAlatBerat = async (namaGambar, bufferGambar, alatBerat) => {
       alatBerat.no_registrasi
     );
   if (existingAlatBerat) {
-    throw new Error("Nomor resgistrasi sudah terdaftar");
+    throw new Error("Nomor registrasi sudah terdaftar");
   }
 
-  const exixtingKendaraan = await kendaraanRepositori.getKendaraanByNoPol(
+  const existingKendaraan = await kendaraanRepositori.getKendaraanByNoPol(
     alatBerat.no_registrasi
   );
-  if (exixtingKendaraan) {
-    throw new Error("Nomor resgistrasi sudah terdaftar");
+  if (existingKendaraan) {
+    throw new Error("Nomor registrasi sudah terdaftar");
   }
 
   const existingAlatKerja =
@@ -67,18 +72,18 @@ const inputAlatBerat = async (namaGambar, bufferGambar, alatBerat) => {
       alatBerat.no_registrasi
     );
   if (existingAlatKerja) {
-    throw new Error("Nomor resgistrasi sudah terdaftar");
+    throw new Error("Nomor registrasi sudah terdaftar");
   }
 
   const existingAc = await acRepositori.getAcByNoRegistrasi(
     alatBerat.no_registrasi
   );
   if (existingAc) {
-    throw new Error("Nomor resgistrasi sudah terdaftar");
+    throw new Error("Nomor registrasi sudah terdaftar");
   }
 
   const bufferQrCode = await qrcode.generateQRCode(alatBerat.no_registrasi);
-  const uploadedQR = await image.uploadImage(
+  const qrCode = await image.uploadImage(
     "alatberat/qrcode",
     alatBerat.no_registrasi + ".png",
     bufferQrCode
@@ -87,18 +92,17 @@ const inputAlatBerat = async (namaGambar, bufferGambar, alatBerat) => {
   const uploadedImage = await image.uploadImage(
     "alatberat",
     namaGambar,
-    bufferGambar
+    bufferGambar,
+    "jpeg",
+    800
   );
 
-  await servisBerkalaAlatBeratRepositori.createServisBerkalaAlatBerat(
-    alatBerat.no_registrasi,
-    dayjs().format("YYYY-MM-DD"),
-    dayjs().format("YYYY-MM-DD")
-  );
+  const aset = await createAset(alatBerat.no_registrasi, "alatberat");
 
-  return await alatBeratRepositori.createAlatBerat(
-    uploadedQR,
+  await alatBeratRepositori.createAlatBerat(
+    qrCode,
     uploadedImage,
+    aset,
     alatBerat.kode_barang,
     alatBerat.merek,
     alatBerat.no_registrasi,
@@ -112,10 +116,17 @@ const inputAlatBerat = async (namaGambar, bufferGambar, alatBerat) => {
     alatBerat.penggunaan,
     alatBerat.kondisi
   );
+
+  await servisBerkalaAlatBeratRepositori.createServisBerkalaAlatBerat(
+    alatBerat.no_registrasi,
+    dayjs().format("YYYY-MM-DD"),
+    dayjs().format("YYYY-MM-DD")
+  );
 };
 
 const updateAlatBerat = async (id, namaGambar, bufferGambar, alatBerat) => {
   if (
+    !alatBerat.id_aset ||
     !alatBerat.kode_barang ||
     !alatBerat.merek ||
     !alatBerat.no_registrasi ||
@@ -129,19 +140,19 @@ const updateAlatBerat = async (id, namaGambar, bufferGambar, alatBerat) => {
     !alatBerat.penggunaan ||
     !alatBerat.kondisi
   ) {
-    throw new Error("Data tidak lengkap");
+    throw new Error("Data alat berat tidak lengkap");
   }
-  const existingAlatBerat = await alatBeratRepositori.getAlatBeratById(id);
 
+  const existingAlatBerat = await alatBeratRepositori.getAlatBeratById(id);
   if (!existingAlatBerat) {
     throw new Error("Data tidak ditemukan");
   }
 
-  const exixtingKendaraan = await kendaraanRepositori.getKendaraanByNoPol(
+  const existingKendaraan = await kendaraanRepositori.getKendaraanByNoPol(
     alatBerat.no_registrasi
   );
-  if (exixtingKendaraan) {
-    throw new Error("Nomor resgistrasi sudah terdaftar");
+  if (existingKendaraan) {
+    throw new Error("Nomor registrasi sudah terdaftar");
   }
 
   const existingAlatKerja =
@@ -149,14 +160,14 @@ const updateAlatBerat = async (id, namaGambar, bufferGambar, alatBerat) => {
       alatBerat.no_registrasi
     );
   if (existingAlatKerja) {
-    throw new Error("Nomor resgistrasi sudah terdaftar");
+    throw new Error("Nomor registrasi sudah terdaftar");
   }
 
   const existingAc = await acRepositori.getAcByNoRegistrasi(
     alatBerat.no_registrasi
   );
   if (existingAc) {
-    throw new Error("Nomor resgistrasi sudah terdaftar");
+    throw new Error("Nomor registrasi sudah terdaftar");
   }
 
   const AlatBeratByNoRegistrasi =
@@ -165,21 +176,13 @@ const updateAlatBerat = async (id, namaGambar, bufferGambar, alatBerat) => {
     );
 
   if (AlatBeratByNoRegistrasi && AlatBeratByNoRegistrasi.id_alatberat != id) {
-    throw new Error("Nomor resgistrasi sudah terdaftar");
+    throw new Error("Nomor registrasi sudah terdaftar");
   }
 
+  let gambarBaru = existingAlatBerat.gambar;
   let qrCodeBaru = existingAlatBerat.qrcode;
-  if (existingAlatBerat.no_registrasi != alatBerat.no_registrasi) {
-    const serberalatberat =
-      await servisBerkalaAlatBeratRepositori.getServisBerkalaAlatBeratByNoRegistrasi(
-        existingAlatBerat.no_registrasi
-      );
-    await servisBerkalaAlatBeratRepositori.updateServisBerkalaAlatBerat(
-      serberalatberat.id_serberalatberat,
-      alatBerat.no_registrasi,
-      serberalatberat.oli_mesin,
-      serberalatberat.filter_oli_mesin
-    );
+
+  if (alatBerat.no_registrasi !== existingAlatBerat.no_registrasi) {
     await image.deleteImage("alatberat/qrcode", existingAlatBerat.qrcode);
     const bufferQrCode = await qrcode.generateQRCode(alatBerat.no_registrasi);
     qrCodeBaru = await image.uploadImage(
@@ -187,33 +190,20 @@ const updateAlatBerat = async (id, namaGambar, bufferGambar, alatBerat) => {
       alatBerat.no_registrasi + ".png",
       bufferQrCode
     );
-
-    const servisAlatBerat = await servisRepositori.getServisByNoUnik(
-      existingAlatBerat.no_registrasi
-    );
-    if (servisAlatBerat.length > 0) {
-      await Promise.all(
-        servisAlatBerat.map(async (data) => {
-          await servisRepositori.updateServis(
-            data.id_servis,
-            data.tanggal,
-            alatBerat.no_registrasi,
-            data.nama_bengkel,
-            data.biaya_servis,
-            data.nota_pembayaran,
-            data.dokumentasi
-          );
-        })
-      );
-    }
   }
 
-  let gambarBaru = existingAlatBerat.gambar;
   if (namaGambar && bufferGambar) {
     await image.deleteImage("alatberat", existingAlatBerat.gambar);
-    gambarBaru = await image.uploadImage("alatberat", namaGambar, bufferGambar);
+    gambarBaru = await image.uploadImage(
+      "alatberat",
+      namaGambar,
+      bufferGambar,
+      "jpeg",
+      800
+    );
   }
-  return await alatBeratRepositori.updateAlatBerat(
+  
+  await alatBeratRepositori.updateAlatBerat(
     id,
     qrCodeBaru,
     gambarBaru,
@@ -230,36 +220,47 @@ const updateAlatBerat = async (id, namaGambar, bufferGambar, alatBerat) => {
     alatBerat.penggunaan,
     alatBerat.kondisi
   );
+  await updateAset(alatBerat.id_aset, alatBerat.no_registrasi);
 };
 
+// Menghapus alat berat berdasarkan ID
 const deleteAlatBerat = async (id) => {
-  const existingAlatBerat = await alatBeratRepositori.getAlatBeratById(id);
-  if (!existingAlatBerat) {
-    throw new Error("Data tidak ditemukan");
+  const alatBerat = await alatBeratRepositori.getAlatBeratById(id);
+  if (!alatBerat) {
+    throw new Error("Alat Berat tidak ditemukan");
   }
 
+  // Hapus semua data servis yang terkait
   const servis = await servisRepositori.getServisByNoUnik(
-    existingAlatBerat.no_registrasi
+    alatBerat.no_registrasi
   );
 
   if (servis.length > 0) {
     await Promise.all(
       servis.map(async (data) => {
-        await image.deleteImage("servis/nota", data.nota_pembayaran);
-        await image.deleteImage("servis/dokumentasi", data.dokumentasi);
+        if (data.nota_pembayaran && data.nota_pembayaran.trim() !== "") {
+          await image.deleteImage("servis/nota", data.nota_pembayaran);
+        }
+        if (data.dokumentasi && data.dokumentasi.trim() !== "") {
+          await image.deleteImage("servis/dokumentasi", data.dokumentasi);
+        }
+
         await onderdilRepositori.deleteOnderdilByIdServis(data.id_servis);
       })
     );
-    await servisRepositori.deleteServisByNoUnik(
-      existingAlatBerat.no_registrasi
-    );
+
+    await servisRepositori.deleteServisByIdAset(alatBerat.no_registrasi);
   }
-  await servisBerkalaAlatBeratRepositori.deleteServisBerkalaAlatBeratByNoRegistrasi(
-    existingAlatBerat.no_registrasi
-  );
-  await image.deleteImage("alatberat", existingAlatBerat.gambar);
-  await image.deleteImage("alatberat/qrcode", existingAlatBerat.qrcode);
-  return await alatBeratRepositori.deleteAlatBerat(id);
+
+  if (alatBerat.qrcode && alatBerat.qrcode.trim() !== "") {
+    await image.deleteImage("alatberat/qrcode", alatBerat.qrcode);
+  }
+  if (alatBerat.gambar && alatBerat.gambar.trim() !== "") {
+    await image.deleteImage("alatberat", alatBerat.gambar);
+  }
+
+  await alatBeratRepositori.deleteAlatBerat(id);
+  await deleteAset(alatBerat.id_aset);
 };
 
 export default {

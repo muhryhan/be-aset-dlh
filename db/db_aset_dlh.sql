@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Agu 2025 pada 14.58
+-- Waktu pembuatan: 16 Nov 2025 pada 10.26
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_asetdlh`
+-- Database: `db_aset_dlh`
 --
 
 -- --------------------------------------------------------
@@ -31,6 +31,9 @@ CREATE TABLE `ac` (
   `id_ac` int(11) NOT NULL,
   `qrcode` varchar(255) NOT NULL,
   `gambar` varchar(255) NOT NULL,
+  `id_aset` int(11) NOT NULL,
+  `kode_barang` varchar(50) NOT NULL DEFAULT '02.06.02.04.003',
+  `nama_barang` varchar(255) NOT NULL DEFAULT 'AC Split',
   `merek` varchar(255) NOT NULL,
   `no_registrasi` varchar(255) NOT NULL,
   `no_serial` varchar(255) NOT NULL,
@@ -53,6 +56,8 @@ CREATE TABLE `alatberat` (
   `id_alatberat` int(11) NOT NULL,
   `qrcode` varchar(255) NOT NULL,
   `gambar` varchar(255) NOT NULL,
+  `id_aset` int(11) NOT NULL,
+  `kode_barang` varchar(50) NOT NULL DEFAULT '1.3.1.02.01.04.001',
   `merek` varchar(255) NOT NULL,
   `no_registrasi` varchar(255) NOT NULL,
   `no_mesin` varchar(255) NOT NULL,
@@ -76,6 +81,9 @@ CREATE TABLE `alatkerja` (
   `id_alatkerja` int(11) NOT NULL,
   `qrcode` varchar(255) NOT NULL,
   `gambar` varchar(255) NOT NULL,
+  `id_aset` int(11) NOT NULL,
+  `kode_barang` varchar(50) NOT NULL DEFAULT '1.3.1.02.01.04.001',
+  `nama_barang` varchar(255) NOT NULL DEFAULT 'Chain saw',
   `merek` varchar(255) NOT NULL,
   `no_registrasi` varchar(255) NOT NULL,
   `no_serial` varchar(255) NOT NULL,
@@ -83,7 +91,20 @@ CREATE TABLE `alatkerja` (
   `tahun_pembelian` year(4) NOT NULL,
   `harga_pembelian` int(255) NOT NULL,
   `kondisi` varchar(255) NOT NULL,
+  `pemegang` varchar(255) NOT NULL DEFAULT 'Kantor DLH',
   `keterangan` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `aset`
+--
+
+CREATE TABLE `aset` (
+  `id_aset` int(11) NOT NULL,
+  `no_unik` varchar(255) NOT NULL,
+  `jenis` enum('kendaraan','ac','alatberat','alatkerja') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -96,6 +117,8 @@ CREATE TABLE `kendaraan` (
   `id_kendaraan` int(11) NOT NULL,
   `qrcode` varchar(255) NOT NULL,
   `gambar` varchar(255) NOT NULL,
+  `id_aset` int(11) NOT NULL,
+  `kode_barang` varchar(50) NOT NULL DEFAULT '1.3.1.02.01.04.001',
   `merek` varchar(255) NOT NULL,
   `no_polisi` varchar(255) NOT NULL,
   `no_mesin` varchar(255) NOT NULL,
@@ -187,7 +210,7 @@ CREATE TABLE `serberkendaraan` (
 CREATE TABLE `servis` (
   `id_servis` int(11) NOT NULL,
   `tanggal` date NOT NULL,
-  `no_unik` varchar(255) NOT NULL,
+  `id_aset` int(11) NOT NULL,
   `nama_bengkel` varchar(255) NOT NULL,
   `biaya_servis` int(255) NOT NULL,
   `nota_pembayaran` varchar(255) NOT NULL,
@@ -203,6 +226,7 @@ CREATE TABLE `servis` (
 CREATE TABLE `tanah` (
   `id_tanah` int(11) NOT NULL,
   `gambar` varchar(255) NOT NULL,
+  `kode_barang` varchar(50) NOT NULL DEFAULT '1.3.1.02.01.04.001',
   `nama_barang` varchar(255) NOT NULL,
   `peruntukan` varchar(255) NOT NULL,
   `alamat` varchar(255) NOT NULL,
@@ -225,6 +249,7 @@ CREATE TABLE `tanah` (
 CREATE TABLE `tanaman` (
   `id_tanaman` int(11) NOT NULL,
   `gambar` varchar(255) NOT NULL,
+  `kode_barang` varchar(50) NOT NULL DEFAULT '1.3.1.02.01.04.001',
   `nama` varchar(255) NOT NULL,
   `jenis` varchar(255) NOT NULL,
   `stok` int(255) NOT NULL,
@@ -278,7 +303,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `role`) VALUES
 (1, 'Kepala Dinas', '$2a$12$4OH44WPOXVBMkczY2Kjiku7J7Agb/s6wqCAs6UH6kMtlu4DpJXCyy', 'kepalaDinas'),
-(2, 'Bendahara', '$2a$12$tv.yVv5HWfxSXA4KK8PaC.z7sckQy3uFzIYjk74y9iwIRb9hjWS7C', 'bendahara');
+(2, 'Bendahara', '$2a$12$tv.yVv5HWfxSXA4KK8PaC.z7sckQy3uFzIYjk74y9iwIRb9hjWS7C', 'bendahara'),
 (3, 'Admin', '$2a$12$tPhZsvZbIffNlQEgzMYFG.8y9tgDaPZTnHSmfsvTfOPoQNI3aDoxG', 'admin');
 
 --
@@ -290,64 +315,81 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `role`) VALUES
 --
 ALTER TABLE `ac`
   ADD PRIMARY KEY (`id_ac`),
-  ADD UNIQUE KEY `no_registrasi` (`no_registrasi`);
+  ADD UNIQUE KEY `no_registrasi` (`no_registrasi`),
+  ADD KEY `fk_ac_aset` (`id_aset`);
 
 --
 -- Indeks untuk tabel `alatberat`
 --
 ALTER TABLE `alatberat`
   ADD PRIMARY KEY (`id_alatberat`),
-  ADD UNIQUE KEY `no_registrasi` (`no_registrasi`);
+  ADD UNIQUE KEY `no_registrasi` (`no_registrasi`),
+  ADD KEY `fk_alatberat_aset` (`id_aset`);
 
 --
 -- Indeks untuk tabel `alatkerja`
 --
 ALTER TABLE `alatkerja`
   ADD PRIMARY KEY (`id_alatkerja`),
-  ADD UNIQUE KEY `no_registrasi` (`no_registrasi`);
+  ADD UNIQUE KEY `no_registrasi` (`no_registrasi`),
+  ADD KEY `fk_alatkerja_aset` (`id_aset`);
+
+--
+-- Indeks untuk tabel `aset`
+--
+ALTER TABLE `aset`
+  ADD PRIMARY KEY (`id_aset`),
+  ADD UNIQUE KEY `no_unik` (`no_unik`);
 
 --
 -- Indeks untuk tabel `kendaraan`
 --
 ALTER TABLE `kendaraan`
   ADD PRIMARY KEY (`id_kendaraan`),
-  ADD UNIQUE KEY `no_polisi` (`no_polisi`);
+  ADD UNIQUE KEY `no_polisi` (`no_polisi`),
+  ADD KEY `fk_kendaraan_aset` (`id_aset`);
 
 --
 -- Indeks untuk tabel `onderdil`
 --
 ALTER TABLE `onderdil`
-  ADD PRIMARY KEY (`id_onderdil`);
+  ADD PRIMARY KEY (`id_onderdil`),
+  ADD KEY `onderdil_ibfk_1` (`id_servis`);
 
 --
 -- Indeks untuk tabel `serberac`
 --
 ALTER TABLE `serberac`
-  ADD PRIMARY KEY (`id_serberac`);
+  ADD PRIMARY KEY (`id_serberac`),
+  ADD UNIQUE KEY `no_registrasi` (`no_registrasi`);
 
 --
 -- Indeks untuk tabel `serberalatberat`
 --
 ALTER TABLE `serberalatberat`
-  ADD PRIMARY KEY (`id_serberalatberat`);
+  ADD PRIMARY KEY (`id_serberalatberat`),
+  ADD UNIQUE KEY `no_registrasi` (`no_registrasi`);
 
 --
 -- Indeks untuk tabel `serberalatkerja`
 --
 ALTER TABLE `serberalatkerja`
-  ADD PRIMARY KEY (`id_serberalatkerja`);
+  ADD PRIMARY KEY (`id_serberalatkerja`),
+  ADD UNIQUE KEY `no_registrasi` (`no_registrasi`);
 
 --
 -- Indeks untuk tabel `serberkendaraan`
 --
 ALTER TABLE `serberkendaraan`
-  ADD PRIMARY KEY (`id_serberkendaraan`);
+  ADD PRIMARY KEY (`id_serberkendaraan`),
+  ADD UNIQUE KEY `no_polisi` (`no_polisi`);
 
 --
 -- Indeks untuk tabel `servis`
 --
 ALTER TABLE `servis`
-  ADD PRIMARY KEY (`id_servis`);
+  ADD PRIMARY KEY (`id_servis`),
+  ADD KEY `id_aset` (`id_aset`) USING BTREE;
 
 --
 -- Indeks untuk tabel `tanah`
@@ -365,13 +407,15 @@ ALTER TABLE `tanaman`
 -- Indeks untuk tabel `tanamankeluar`
 --
 ALTER TABLE `tanamankeluar`
-  ADD PRIMARY KEY (`id_tanamankeluar`);
+  ADD PRIMARY KEY (`id_tanamankeluar`),
+  ADD KEY `tanamankeluar_ibfk_1` (`id_tanaman`);
 
 --
 -- Indeks untuk tabel `tanamanmasuk`
 --
 ALTER TABLE `tanamanmasuk`
-  ADD PRIMARY KEY (`id_tanamanmasuk`);
+  ADD PRIMARY KEY (`id_tanamanmasuk`),
+  ADD KEY `tanamanmasuk_ibfk_1` (`id_tanaman`);
 
 --
 -- Indeks untuk tabel `user`
@@ -388,73 +432,79 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `ac`
 --
 ALTER TABLE `ac`
-  MODIFY `id_ac` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_ac` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `alatberat`
 --
 ALTER TABLE `alatberat`
-  MODIFY `id_alatberat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_alatberat` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `alatkerja`
 --
 ALTER TABLE `alatkerja`
-  MODIFY `id_alatkerja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_alatkerja` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `aset`
+--
+ALTER TABLE `aset`
+  MODIFY `id_aset` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `kendaraan`
 --
 ALTER TABLE `kendaraan`
-  MODIFY `id_kendaraan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_kendaraan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `onderdil`
 --
 ALTER TABLE `onderdil`
-  MODIFY `id_onderdil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_onderdil` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `serberac`
 --
 ALTER TABLE `serberac`
-  MODIFY `id_serberac` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_serberac` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `serberalatberat`
 --
 ALTER TABLE `serberalatberat`
-  MODIFY `id_serberalatberat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_serberalatberat` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `serberalatkerja`
 --
 ALTER TABLE `serberalatkerja`
-  MODIFY `id_serberalatkerja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_serberalatkerja` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `serberkendaraan`
 --
 ALTER TABLE `serberkendaraan`
-  MODIFY `id_serberkendaraan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_serberkendaraan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `servis`
 --
 ALTER TABLE `servis`
-  MODIFY `id_servis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_servis` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tanah`
 --
 ALTER TABLE `tanah`
-  MODIFY `id_tanah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_tanah` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tanaman`
 --
 ALTER TABLE `tanaman`
-  MODIFY `id_tanaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_tanaman` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tanamankeluar`
@@ -472,7 +522,83 @@ ALTER TABLE `tanamanmasuk`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `ac`
+--
+ALTER TABLE `ac`
+  ADD CONSTRAINT `fk_ac_aset` FOREIGN KEY (`id_aset`) REFERENCES `aset` (`id_aset`) ON DELETE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `alatberat`
+--
+ALTER TABLE `alatberat`
+  ADD CONSTRAINT `fk_alatberat_aset` FOREIGN KEY (`id_aset`) REFERENCES `aset` (`id_aset`) ON DELETE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `alatkerja`
+--
+ALTER TABLE `alatkerja`
+  ADD CONSTRAINT `fk_alatkerja_aset` FOREIGN KEY (`id_aset`) REFERENCES `aset` (`id_aset`) ON DELETE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `kendaraan`
+--
+ALTER TABLE `kendaraan`
+  ADD CONSTRAINT `fk_kendaraan_aset` FOREIGN KEY (`id_aset`) REFERENCES `aset` (`id_aset`) ON DELETE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `onderdil`
+--
+ALTER TABLE `onderdil`
+  ADD CONSTRAINT `onderdil_ibfk_1` FOREIGN KEY (`id_servis`) REFERENCES `servis` (`id_servis`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `serberac`
+--
+ALTER TABLE `serberac`
+  ADD CONSTRAINT `serberac_ibfk_1` FOREIGN KEY (`no_registrasi`) REFERENCES `ac` (`no_registrasi`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `serberalatberat`
+--
+ALTER TABLE `serberalatberat`
+  ADD CONSTRAINT `serberalatberat_ibfk_1` FOREIGN KEY (`no_registrasi`) REFERENCES `alatberat` (`no_registrasi`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `serberalatkerja`
+--
+ALTER TABLE `serberalatkerja`
+  ADD CONSTRAINT `serberalatkerja_ibfk_1` FOREIGN KEY (`no_registrasi`) REFERENCES `alatkerja` (`no_registrasi`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `serberkendaraan`
+--
+ALTER TABLE `serberkendaraan`
+  ADD CONSTRAINT `serberkendaraan_ibfk_1` FOREIGN KEY (`no_polisi`) REFERENCES `kendaraan` (`no_polisi`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `servis`
+--
+ALTER TABLE `servis`
+  ADD CONSTRAINT `servis_ibfk_1` FOREIGN KEY (`id_aset`) REFERENCES `aset` (`id_aset`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `tanamankeluar`
+--
+ALTER TABLE `tanamankeluar`
+  ADD CONSTRAINT `tanamankeluar_ibfk_1` FOREIGN KEY (`id_tanaman`) REFERENCES `tanaman` (`id_tanaman`) ON DELETE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `tanamanmasuk`
+--
+ALTER TABLE `tanamanmasuk`
+  ADD CONSTRAINT `tanamanmasuk_ibfk_1` FOREIGN KEY (`id_tanaman`) REFERENCES `tanaman` (`id_tanaman`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -5,6 +5,11 @@ import servisBerkalaAlatKerjaRepositori from "../repositori/servisBerkalaAlatKer
 import kendaraanRepositori from "../repositori/kendaraan-repositori.js";
 import alatBeratRepositori from "../repositori/alatBerat-repositori.js";
 import acRepositori from "../repositori/ac-repositori.js";
+import {
+  createAset,
+  deleteAset,
+  updateAset,
+} from "../repositori/aset-repositori.js";
 import image from "../helper/image.js";
 import qrcode from "../helper/qr.js";
 import dayjs from "dayjs";
@@ -54,10 +59,10 @@ const inputAlatKerja = async (namaGambar, bufferGambar, alatKerja) => {
     throw new Error("Nomor resgistrasi sudah terdaftar");
   }
 
-  const exixtingKendaraan = await kendaraanRepositori.getKendaraanByNoPol(
+  const existingKendaraan = await kendaraanRepositori.getKendaraanByNoPol(
     alatKerja.no_registrasi
   );
-  if (exixtingKendaraan) {
+  if (existingKendaraan) {
     throw new Error("Nomor resgistrasi sudah terdaftar");
   }
 
@@ -77,26 +82,27 @@ const inputAlatKerja = async (namaGambar, bufferGambar, alatKerja) => {
   }
 
   const bufferQr = await qrcode.generateQRCode(alatKerja.no_registrasi);
-  const uploadedQr = await image.uploadImage(
+
+  const qrCode = await image.uploadImage(
     "alatkerja/qrcode",
     alatKerja.no_registrasi + ".png",
     bufferQr
   );
 
-  await servisBerkalaAlatKerjaRepositori.createServisBerkalaAlatKerja(
-    alatKerja.no_registrasi,
-    dayjs().format("YYYY-MM-DD")
-  );
-
   const uploadedImage = await image.uploadImage(
     "alatkerja",
     namaGambar,
-    bufferGambar
+    bufferGambar,
+    "jpeg",
+    800
   );
-  alatKerja.gambar = uploadedImage;
-  const alatKerjaBaru = await alatKerjaRepositori.createAlatKerja(
-    uploadedQr,
+
+  const aset = await createAset(alatKerja.no_registrasi, "alatkerja");
+
+  await alatKerjaRepositori.createAlatKerja(
+    qrCode,
     uploadedImage,
+    aset,
     alatKerja.kode_barang,
     alatKerja.nama_barang,
     alatKerja.merek,
@@ -109,11 +115,16 @@ const inputAlatKerja = async (namaGambar, bufferGambar, alatKerja) => {
     alatKerja.pemegang,
     alatKerja.keterangan
   );
-  return alatKerjaBaru;
+
+  await servisBerkalaAlatKerjaRepositori.createServisBerkalaAlatKerja(
+    alatKerja.no_registrasi,
+    dayjs().format("YYYY-MM-DD")
+  );
 };
 
 const updateAlatKerja = async (id, namaGambar, bufferGambar, alatKerja) => {
   if (
+    !alatKerja.id_aset ||
     !alatKerja.kode_barang ||
     !alatKerja.nama_barang ||
     !alatKerja.merek ||
@@ -142,10 +153,10 @@ const updateAlatKerja = async (id, namaGambar, bufferGambar, alatKerja) => {
     throw new Error("Nomor resgistrasi sudah terdaftar");
   }
 
-  const exixtingKendaraan = await kendaraanRepositori.getKendaraanByNoPol(
+  const existingKendaraan = await kendaraanRepositori.getKendaraanByNoPol(
     alatKerja.no_registrasi
   );
-  if (exixtingKendaraan) {
+  if (existingKendaraan) {
     throw new Error("Nomor resgistrasi sudah terdaftar");
   }
 
@@ -164,17 +175,10 @@ const updateAlatKerja = async (id, namaGambar, bufferGambar, alatKerja) => {
     throw new Error("Nomor resgistrasi sudah terdaftar");
   }
 
+  let gambarBaru = existingAlatKerja.gambar;
   let qrCodeBaru = existingAlatKerja.qrcode;
-  if (existingAlatKerja.no_registrasi != alatKerja.no_registrasi) {
-    const serberalatkerja =
-      await servisBerkalaAlatKerjaRepositori.getServisBerkalaAlatKerjaByNoRegistrasi(
-        existingAlatKerja.no_registrasi
-      );
-    await servisBerkalaAlatKerjaRepositori.updateServisBerkalaAlatKerja(
-      serberalatkerja.id_serberalatkerja,
-      alatKerja.no_registrasi,
-      serberalatkerja.oli_mesin
-    );
+
+  if (alatKerja.no_registrasi !== existingAlatKerja.no_registrasi) {
     await image.deleteImage("alatkerja/qrcode", existingAlatKerja.qrcode);
     const bufferQr = await qrcode.generateQRCode(alatKerja.no_registrasi);
     qrCodeBaru = await image.uploadImage(
@@ -182,35 +186,20 @@ const updateAlatKerja = async (id, namaGambar, bufferGambar, alatKerja) => {
       alatKerja.no_registrasi + ".png",
       bufferQr
     );
-
-    const servisAlatKerja = await servisRepositori.getServisByNoUnik(
-      existingAlatKerja.no_registrasi
-    );
-    if (servisAlatKerja.length > 0) {
-      await Promise.all(
-        servisAlatKerja.map(async (data) => {
-          await servisRepositori.updateServis(
-            data.id_servis,
-            data.tanggal,
-            alatKerja.no_registrasi,
-            data.nama_bengkel,
-            data.biaya_servis,
-            data.nota_pembayaran,
-            data.dokumentasi
-          );
-        })
-      );
-    }
   }
-
-  let gambarBaru = existingAlatKerja.gambar;
 
   if (namaGambar && bufferGambar) {
     await image.deleteImage("alatkerja", existingAlatKerja.gambar);
-    gambarBaru = await image.uploadImage("alatkerja", namaGambar, bufferGambar);
+    gambarBaru = await image.uploadImage(
+      "alatkerja",
+      namaGambar,
+      bufferGambar,
+      "jpeg",
+      800
+    );
   }
 
-  const alatKerjaBaru = await alatKerjaRepositori.updateAlatKerja(
+  await alatKerjaRepositori.updateAlatKerja(
     id,
     qrCodeBaru,
     gambarBaru,
@@ -226,14 +215,17 @@ const updateAlatKerja = async (id, namaGambar, bufferGambar, alatKerja) => {
     alatKerja.pemegang,
     alatKerja.keterangan
   );
-  return alatKerjaBaru;
+  await updateAset(alatKerja.id_aset, alatKerja.no_registrasi);
 };
 
+// Menghapus alat kerja berdasarkan ID
 const deleteAlatKerja = async (id) => {
   const alatKerja = await alatKerjaRepositori.getAlatKerjaById(id);
   if (!alatKerja) {
-    throw new Error("Data tidak ditemukan");
+    throw new Error("Alat Berat tidak ditemukan");
   }
+
+  // Hapus semua data servis yang terkait
   const servis = await servisRepositori.getServisByNoUnik(
     alatKerja.no_registrasi
   );
@@ -241,20 +233,29 @@ const deleteAlatKerja = async (id) => {
   if (servis.length > 0) {
     await Promise.all(
       servis.map(async (data) => {
-        await image.deleteImage("servis/nota", data.nota_pembayaran);
-        await image.deleteImage("servis/dokumentasi", data.dokumentasi);
+        if (data.nota_pembayaran && data.nota_pembayaran.trim() !== "") {
+          await image.deleteImage("servis/nota", data.nota_pembayaran);
+        }
+        if (data.dokumentasi && data.dokumentasi.trim() !== "") {
+          await image.deleteImage("servis/dokumentasi", data.dokumentasi);
+        }
+
         await onderdilRepositori.deleteOnderdilByIdServis(data.id_servis);
       })
     );
-    await servisRepositori.deleteServisByNoUnik(alatKerja.no_registrasi);
+
+    await servisRepositori.deleteServisByIdAset(alatKerja.no_registrasi);
   }
 
-  await servisBerkalaAlatKerjaRepositori.deleteServisBerkalaAlatKerjaByNoRegistrasi(
-    alatKerja.no_registrasi
-  );
-  await image.deleteImage("alatkerja/qrcode", alatKerja.qrcode);
-  await image.deleteImage("alatkerja", alatKerja.gambar);
-  return await alatKerjaRepositori.deleteAlatKerja(id);
+  if (alatKerja.qrcode && alatKerja.qrcode.trim() !== "") {
+    await image.deleteImage("alatKerja/qrcode", alatKerja.qrcode);
+  }
+  if (alatKerja.gambar && alatKerja.gambar.trim() !== "") {
+    await image.deleteImage("alatKerja", alatKerja.gambar);
+  }
+
+  await alatKerjaRepositori.deleteAlatKerja(id);
+  await deleteAset(alatKerja.id_aset);
 };
 
 export default {

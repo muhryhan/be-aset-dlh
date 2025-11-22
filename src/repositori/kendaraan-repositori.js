@@ -24,6 +24,7 @@ const getKendaraanByNoPol = async (no_polisi) => {
 const createKendaraan = async (
   qrcode,
   gambar,
+  aset,
   kode_barang,
   merek,
   no_polisi,
@@ -39,27 +40,32 @@ const createKendaraan = async (
   penggunaan,
   kondisi
 ) => {
-  return await conn.query(
-    "INSERT INTO kendaraan (qrcode, gambar, kode_barang, merek, no_polisi, no_mesin, no_rangka, warna, harga_pembelian, tahun_pembuatan, kategori, pajak, pemegang, nik, penggunaan, kondisi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-    [
-      qrcode,
-      gambar,
-      kode_barang,
-      merek,
-      no_polisi,
-      no_mesin,
-      no_rangka,
-      warna,
-      harga_pembelian,
-      tahun_pembuatan,
-      kategori,
-      pajak,
-      pemegang,
-      nik,
-      penggunaan,
-      kondisi,
-    ]
-  );
+  const sql = `
+  INSERT INTO kendaraan (
+    qrcode, gambar, id_aset, kode_barang, merek, no_polisi,
+    no_mesin, no_rangka, warna, harga_pembelian, tahun_pembuatan,
+    kategori, pajak, pemegang, nik, penggunaan, kondisi
+  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+`;
+  await conn.query(sql, [
+    qrcode,
+    gambar,
+    aset,
+    kode_barang,
+    merek,
+    no_polisi,
+    no_mesin,
+    no_rangka,
+    warna,
+    harga_pembelian,
+    tahun_pembuatan,
+    kategori,
+    pajak,
+    pemegang,
+    nik,
+    penggunaan,
+    kondisi,
+  ]);
 };
 
 const updateKendaraan = async (
