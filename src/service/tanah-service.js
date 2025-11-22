@@ -21,6 +21,7 @@ const inputTanah = async (namaGambar, bufferGambar, tanah) => {
   if (
     !namaGambar ||
     !bufferGambar ||
+    !tanah.kode_barang ||
     !tanah.nama_barang ||
     !tanah.peruntukan ||
     !tanah.alamat ||
@@ -38,6 +39,7 @@ const inputTanah = async (namaGambar, bufferGambar, tanah) => {
 
   return await tanahRepositori.createTanah(
     gambarBaru,
+    tanah.kode_barang,
     tanah.nama_barang,
     tanah.peruntukan,
     tanah.alamat,
@@ -54,6 +56,7 @@ const inputTanah = async (namaGambar, bufferGambar, tanah) => {
 
 const updateTanah = async (id, namaGambar, bufferGambar, tanah) => {
   if (
+    !tanah.kode_barang ||
     !tanah.nama_barang ||
     !tanah.peruntukan ||
     !tanah.alamat ||
@@ -81,6 +84,7 @@ const updateTanah = async (id, namaGambar, bufferGambar, tanah) => {
   return await tanahRepositori.updateTanah(
     id,
     gambarBaru,
+    tanah.kode_barang,
     tanah.nama_barang,
     tanah.peruntukan,
     tanah.alamat,

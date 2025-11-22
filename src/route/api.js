@@ -29,6 +29,11 @@ userRouter.put("/api/user/:id", authMiddleware, userController.updateUser);
 userRouter.delete("/api/user/:id", authMiddleware, userController.deleteUser);
 userRouter.post("/api/logout", authMiddleware, userController.logout);
 
+// ============== Route Check-Token ==============
+userRouter.get("/check-token", authMiddleware, (req, res) => {
+  res.json({ valid: true });
+});
+
 // ============== Route Kendaraan ==============
 userRouter.get(
   "/api/kendaraan",
@@ -118,7 +123,7 @@ userRouter.delete(
 // ============== Route AC ==============
 userRouter.get("/api/ac", authMiddleware, acController.getAc);
 userRouter.get(
-  "/api/ac/:no_serial",
+  "/api/ac/:no_registrasi",
   authMiddleware,
   acController.getAcByNoRegistrasi
 );
@@ -248,11 +253,13 @@ userRouter.delete(
 
 // ============== Route Servis ==============
 userRouter.get("/api/servis", authMiddleware, servisController.getServis);
+
 userRouter.get(
   "/api/servis/:id",
   authMiddleware,
   servisController.getServisById
 );
+
 userRouter.get(
   "/api/servis/nounik/:no_unik",
   authMiddleware,

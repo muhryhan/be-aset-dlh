@@ -54,6 +54,20 @@ const getCountTanaman = async () => {
   return rows[0];
 };
 
+const getCountTaman = async () => {
+  const [rows] = await conn.query(
+    "SELECT COUNT(*) as Taman FROM tanah WHERE nama_barang = 'Tanah Taman'"
+  );
+  return rows[0];
+};
+
+const getCountTPU = async () => {
+  const [rows] = await conn.query(
+    "SELECT COUNT(*) as TPU FROM tanah WHERE nama_barang = 'Tanah TPU'"
+  );
+  return rows[0];
+};
+
 export default {
   getCountR2,
   getCountR3,
@@ -63,4 +77,6 @@ export default {
   getCountAlatKerja,
   getCountAc,
   getCountTanaman,
+  getCountTaman,
+  getCountTPU,
 };

@@ -43,7 +43,6 @@ const getTanamanMasukByIdTanaman = async (req, res) => {
 
 const inputTanamanMasuk = async (req, res) => {
   try {
-    console.log(req.body);
     const data = req.body;
     await tanamanMasukService.inputTanamanMasuk(data);
     res

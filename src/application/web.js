@@ -16,7 +16,8 @@ const web = express();
 
 web.use(
   cors({
-    origin: "http://localhost:5173", // HARUS alamat spesifik, bukan '*'
+    // origin: "http://localhost:5173",
+    origin: "https://sima-dlh.vercel.app",
     credentials: true,
   })
 );

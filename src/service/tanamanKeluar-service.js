@@ -49,6 +49,7 @@ const inputTanamanKeluar = async (data) => {
   await tanamanRepositori.updateTanaman(
     data.id_tanaman,
     tanaman.gambar,
+    tanaman.kode_barang,
     tanaman.nama,
     tanaman.jenis,
     tanaman.stok,
@@ -96,6 +97,7 @@ const updateTanamanKeluar = async (id, data) => {
   await tanamanRepositori.updateTanaman(
     data.id_tanaman,
     tanaman.gambar,
+    tanaman.kode_barang,
     tanaman.nama,
     tanaman.jenis,
     tanaman.stok,
@@ -129,6 +131,7 @@ const deleteTanamanKeluar = async (id) => {
   await tanamanRepositori.updateTanaman(
     tanamanKeluar.id_tanaman,
     tanaman.gambar,
+    tanaman.kode_barang,
     tanaman.nama,
     tanaman.jenis,
     tanaman.stok,
